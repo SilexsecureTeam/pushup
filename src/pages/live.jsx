@@ -1,7 +1,7 @@
 import React from "react";
 import { Search, Play, Bell, ArrowRight, ChevronRight } from "lucide-react";
 import Navbar from "../components/Navbar";
-import Footer from "../components/ooter";
+import Footer from "../components/Footer";
 
 export default function LiveStreams() {
   return (
