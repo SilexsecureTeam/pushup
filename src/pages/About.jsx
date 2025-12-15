@@ -176,57 +176,49 @@ export default function About() {
             </p>
       
       <form className="space-y-8">
-        {["Name", "Email", "Phone number"].map((label) => (
-          <div key={label} className="relative">
-            <input
-              type={label.includes("Email") ? "email" : label.includes("Phone") ? "tel" : "text"}
-              required
-              placeholder=" "
-              className="peer w-full px-6 py-5 rounded-lg bg-white border border-white/20 focus:border-green-400 focus:outline-none placeholder-transparent"
-            />
-            <label className="absolute left-6 top-1/2 -translate-y-1/2 text-[#333333] pointer-events-none transition-all duration-200
-              peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:-translate-y-1/2
-              peer-focus:top-0 peer-focus:text-xs peer-focus:text-green-400
-              peer-valid:top-0 peer-valid:text-xs">
-              {label} <span className="text-red-500">*</span>
-            </label>
-          </div>
-        ))}
-      
-        <select className="w-full px-6 py-5 rounded-lg bg-white border border-gray-300 text-[#333333] focus:border-green-400 focus:outline-none">
-          <option value="" disabled selected>How did you find us?</option>
-          <option>Google</option>
-          <option>Friend</option>
-          <option>Social Media</option>
-        </select>
-      
-        <button className="w-full bg-[#334209] hover:bg-green-500 text-white py-6 rounded-lg font-bold text-lg transition">
-          SEND
-        </button>
-      </form>
-      
-            <div className="flex flex-wrap justify-center gap-10 mt-12 text-black">
-              <div className="flex items-center gap-4">
-                <Phone className="text-black" size={28} />
-                <div>
-                  <p className="text-sm opacity-70">PHONE</p>
-                  <p className="text-lg font-medium text-[#334209]">+2343 5432 1234</p>
+              {["Name", "Email", "Phone number"].map((label) => (
+                <div key={label} className="relative">
+                  <input
+                    type={label.includes("Email") ? "email" : label.includes("Phone") ? "tel" : "text"}
+                    required
+                    placeholder=" "
+                    className="peer w-full px-6 py-5 rounded-lg bg-white border border-white/20 focus:border-green-400 focus:outline-none placeholder-transparent"
+                  />
+                  <label className="absolute left-6 top-1/2 -translate-y-1/2 text-[#333333] pointer-events-none transition-all duration-200
+                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:-translate-y-1/2
+                    peer-focus:top-0 peer-focus:text-xs peer-focus:text-green-400
+                    peer-valid:top-0 peer-valid:text-xs">
+                    {label} <span className="text-red-500">*</span>
+                  </label>
                 </div>
+              ))}
+
+              <select className="w-full px-6 py-5 rounded-lg bg-white border border-gray-300 text-[#333333] focus:border-green-400 focus:outline-none">
+                <option value="" disabled selected>How did you find us?</option>
+                <option>Google</option>
+                <option>Friend</option>
+                <option>Social Media</option>
+              </select>
+
+              <button className="w-full bg-[#334209] hover:bg-green-500 text-white py-6 rounded-lg font-bold text-lg transition">
+                SEND
+              </button>
+            </form>
+      
+            <div className="flex flex-wrap gap-8 mt-10 text-gray-700">
+              <div className="flex items-center gap-3">
+                <Phone className="text-green-600" size={24} />
+                <span>+234 5432 1234</span>
               </div>
-              <div className="flex items-center gap-4">
-                <MessageCircle className="text-black" size={28} />
-                <div>
-                  <p className="text-sm opacity-70">WHATSAPP</p>
-                  <p className="text-lg font-medium text-[#334209]">+2343 5432 1234</p>
-                </div>
+              <div className="flex items-center gap-3">
+                <MessageCircle className="text-green-600" size={24} />
+                <span>+234 5432 1234</span>
               </div>
-              <div className="flex items-center gap-4">
-                <Mail className="text-black" size={28} />
-                <div>
-                  <p className="text-sm opacity-70">EMAIL</p>
-                  <p className="text-lg font-medium text-[#334209]">info@marcc.com.au</p>
-                </div>
+              <div className="flex items-center gap-3">
+                <Mail className="text-green-600" size={24} />
+                <span>info@marcc.com.au</span>
               </div>
+            
             </div>
           </div>
       

@@ -19,7 +19,7 @@ export default function Mentors() {
         <div className="absolute inset-0 bg-black/60"></div>
 
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 text-white">
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-6">
+          <h1 className="text-3xl md:text-5xl font-extrabold mb-6">
             Meet Our Mentors
           </h1>
           <p className="text-xl md:text-2xl max-w-4xl leading-relaxed">
@@ -118,28 +118,20 @@ export default function Mentors() {
               </button>
             </form>
 
-            <div className="flex flex-wrap justify-center gap-10 mt-12 text-black">
-              <div className="flex items-center gap-4">
-                <Phone className="text-black" size={28} />
-                <div>
-                  <p className="text-sm opacity-70">PHONE</p>
-                  <p className="text-lg font-medium text-[#334209]">+2343 5432 1234</p>
-                </div>
+            <div className="flex flex-wrap gap-8 mt-10 text-gray-700">
+              <div className="flex items-center gap-3">
+                <Phone className="text-green-600" size={24} />
+                <span>+234 5432 1234</span>
               </div>
-              <div className="flex items-center gap-4">
-                <MessageCircle className="text-black" size={28} />
-                <div>
-                  <p className="text-sm opacity-70">WHATSAPP</p>
-                  <p className="text-lg font-medium text-[#334209]">+2343 5432 1234</p>
-                </div>
+              <div className="flex items-center gap-3">
+                <MessageCircle className="text-green-600" size={24} />
+                <span>+234 5432 1234</span>
               </div>
-              <div className="flex items-center gap-4">
-                <Mail className="text-black" size={28} />
-                <div>
-                  <p className="text-sm opacity-70">EMAIL</p>
-                  <p className="text-lg font-medium text-[#334209]">info@marcc.com.au</p>
-                </div>
+              <div className="flex items-center gap-3">
+                <Mail className="text-green-600" size={24} />
+                <span>info@marcc.com.au</span>
               </div>
+            
             </div>
           </div>
 

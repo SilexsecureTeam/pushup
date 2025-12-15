@@ -28,10 +28,10 @@ export default function Learning() {
      
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-xl md:text-2xl font-bold text-green-600 mb-4">
+          <h2 className="text-xl md:text-2xl font-bold text-[#1E6A00] mb-4">
             Learn & Grow
           </h2>
-          <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-6">
+          <h3 className="text-3xl md:text-4xl font-semibold text-[#333333] mb-6">
             The Journey Behind Pushup.ng
           </h3>
           <p className="text-lg text-gray-600 max-w-4xl mx-auto mb-12">
@@ -48,7 +48,7 @@ export default function Learning() {
                 className="w-full pl-16 pr-6 py-5 rounded-md border-2 border-gray-300 focus:border-green-600 focus:outline-none text-lg"
               />
             </div>
-            <button className="bg-green-600 hover:bg-green-700 text-white px-12 py-5 rounded-md font-bold text-lg flex items-center gap-3 transition">
+            <button className="bg-[#1E6A00] hover:bg-green-700 text-white px-12 py-5 rounded-md font-bold text-lg flex items-center gap-3 transition">
               Search <ArrowRight size={24} />
             </button>
           </div>
@@ -74,7 +74,7 @@ export default function Learning() {
                     </span>
                     <span className="ml-auto font-medium">By David Chucks</span>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                  <h3 className="text-2xl font-bold text-[#333333] mb-3">
                     Content Marketing
                   </h3>
                   <p className="text-gray-600 mb-8 line-clamp-3">
