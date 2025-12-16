@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 export default function Footer() {
   return (
     <footer className="bg-[#2C3A06] text-white py-16 px-6 md:px-20">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
 
         
         <div>
@@ -54,6 +54,17 @@ export default function Footer() {
             <li>Our Team</li>
             <li>Blog</li>
             <li>Contact Us</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="font-semibold text-lg mb-5">Our Social Media</h3>
+          <ul className="space-y-3">
+            <li>Instagram</li>
+            <li>Facebook</li>
+            <li>Twitter</li>
+            <li>Linkedin</li>
+            <li>YouTube</li>
           </ul>
         </div>
 
