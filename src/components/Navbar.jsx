@@ -5,8 +5,8 @@ import { Icon } from "@iconify/react";
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const linkClasses = "hover:text-blue-700 transition font-medium text-lg";
-  const activeClasses = "text-blue-700 font-semibold";
+  const linkClasses = "hover:text-green-700 transition font-medium text-lg";
+  const activeClasses = "text-[#1E6A00] font-semibold";
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
@@ -31,7 +31,7 @@ export default function Navbar() {
         
         <div className="hidden md:flex items-center gap-6">
           <NavLink to="/login" className="text-gray-700 text-lg font-medium">Log in</NavLink>
-          <button className="bg-gradient-to-b from-green-600 to-green-800 text-white text-lg font-semibold px-8 py-3 rounded-xl shadow-md hover:opacity-90 transition">
+          <button className="bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white text-lg font-semibold px-8 py-3 shadow-md hover:opacity-90 transition">
             Get Started
           </button>
         </div>

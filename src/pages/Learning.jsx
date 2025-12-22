@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 import { Search, ArrowRight, ChevronRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -49,12 +50,12 @@ export default function Learning() {
               />
             </div>
             <button className="bg-[#1E6A00] hover:bg-green-700 text-white px-12 py-5 rounded-md font-bold text-lg flex items-center gap-3 transition">
-              Search <ArrowRight size={24} />
+              Search  
             </button>
           </div>
 
         
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {[...Array(12)].map((_, i) => (
               <div
                 key={i}
@@ -89,11 +90,14 @@ export default function Learning() {
           </div>
 
         
-          <div className="mt-20">
-            <button className="bg-gradient-to-r from-[#1E6A00] to-[#334209] hover:bg-green-700 text-white px-16 py-5 rounded-md font-bold text-xl flex items-center gap-4 mx-auto transition">
-              NEXT < ChevronRight size={28} />
-            </button>
-          </div>
+         <div className="mt-20">
+  <Link 
+    to="/Topicdetails"
+    className="bg-gradient-to-r from-[#1E6A00] to-[#334209] hover:bg-green-700 text-white px-16 py-5 rounded-md font-bold text-xl flex items-center gap-4 mx-auto transition w-fit"
+  >
+    NEXT <ChevronRight size={28} />
+  </Link>
+</div>
         </div>
       </section>
 

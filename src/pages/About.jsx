@@ -15,7 +15,7 @@ export default function About() {
 
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 text-white">
           <h1 className="text-5xl md:text-7xl font-extrabold mb-6">About Us</h1>
-          <p className="text-xl md:text-2xl max-w-4xl leading-relaxed">
+          <p className="text-2xl md:text-3xl max-w-4xl leading-relaxed">
             We're building a more informed, skilled, and empowered Nigeria through credible civic information, 
             meaningful learning, and community-driven mentorship.
           </p>
@@ -26,23 +26,23 @@ export default function About() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-xl md:text-2xl font-semibold text-[#1E6A00] mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1E6A00]  mb-8">
               Our Story<br />
-              <span className="text-[#333333] text-4xl">The Journey Behind Pushup.ng</span>
+              <span className="text-[#333333] text-5xl">The Journey Behind Pushup.ng</span>
             </h2>
-            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+            <p className="text-lg text-[#333333] leading-relaxed mb-6">
               pushup.ng was created with a simple but powerful mission: to help Nigerians access credible governance information, 
               learn relevant skills, and grow through meaningful mentorship.
             </p>
-            <p className="text-lg text-gray-700 leading-relaxed mb-8">
+            <p className="text-lg text-[#333333] leading-relaxed mb-8">
               What started as a small idea — making civic engagement easier — has grown into a trusted hub where people can watch government 
               events live, build career-ready skills, and connect with mentors who care about their growth.
             </p>
-            <p className="text-lg text-gray-700 leading-relaxed mb-10">
+            <p className="text-lg text-[#333333] leading-relaxed mb-10">
               We believe real progress happens when learning, leadership, and community come together. 
               Every feature on Pushup.ng is designed to empower individuals, strengthen institutions, and inspire positive change across Nigeria.
             </p>
-            <a href="#" className="inline-flex items-center gap-3 bg-[#1E6A00] text-white px-8 py-4 rounded-full font-bold hover:bg-green-700 transition">
+            <a href="#" className="inline-flex items-center gap-3 bg-[#1E6A00] text-white px-8 py-4 rounded-md font-bold hover:bg-green-700 transition">
               Explore Pushup.ng 
             </a>
           </div>
@@ -80,19 +80,19 @@ export default function About() {
           <div>
             <h2 className="text-xl md:text-2xl font-semibold text-[#358307] mb-6">
               Our Vision<br />
-              <span className="text-[#333333] text-3xl">The Future We're Building</span>
+              <span className="text-[#333333] text-5xl">The Future We're Building</span>
             </h2>
-            <p className="text-lg text-gray-700 leading-relaxed mb-8">
+            <p className="text-xl text-[#333333] leading-relaxed mb-8">
               Our vision is to build a Nigeria where access to knowledge, mentorship, and transparent governance is not a privilege but a 
               standard for everyone. We imagine a society where citizens are empowered with the information they need to participate confidently 
               in civic life; where young people can learn in-demand skills from trusted experts, and where creators, leaders, and institutions 
               can share insights that move the country forward.
             </p>
-            <p className="text-lg text-gray-700 leading-relaxed mb-10">
+            <p className="text-lg text-[#333333] leading-relaxed mb-10">
               Pushup.ng aims to be the bridge that connects people to opportunities, mentors to learners, and leaders to the next generation 
               of informed, skilled, and community-driven Nigerians.
             </p>
-            <a href="#" className="inline-flex items-center gap-3 bg-[#1E6A00] text-white px-8 py-4 rounded-full font-bold hover:bg-green-700 transition">
+            <a href="#" className="inline-flex items-center gap-3 bg-[#1E6A00] text-white px-8 py-4 rounded-md font-bold hover:bg-green-700 transition">
               Explore Pushup.ng 
             </a>
           </div>
@@ -102,8 +102,8 @@ export default function About() {
      
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-[#358307] mb-4">Our Core Values</h2>
-          <p className="text-xl text-gray-600 mb-16">The principles that guide everything we do</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#358307] mb-4">Our Core Values</h2>
+          <p className="text-4xl text-[#333333] mb-16">The principles that guide everything we do</p>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-[#358307] text-white p-8 rounded-3xl shadow-xl">
@@ -156,7 +156,7 @@ export default function About() {
   className="rounded-2xl shadow-xl w-full group-hover:scale-105 transition" 
 />
                 <h3 className="mt-6 font-bold text-lg">Jessie Hassan</h3>
-                <p className="text-gray-600">jessie.hassan@team.pushup.ng</p>
+                <p className="text-[#333333]">jessie.hassan@team.pushup.ng</p>
               </div>
             ))}
           </div>

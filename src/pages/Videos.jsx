@@ -39,14 +39,13 @@ export default function Videos() {
       
       <section className="pt-40 pb-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h1 className="text-4xl md:text-6xl font-semibold text-[#333333] mb-4">
+          <h1 className="text-4xl md:text-5xl font-semibold text-[#333333] mb-4">
             Featured Videos
           </h1>
-          <p className="text-xl text-gray-600 max-w-4xl mb-12">
-            Watch curated videos on governance, learning, and community insights.
-          </p>
-
-          
+       <p className="text-2xl text-[#333333] max-w-4xl mb-12">
+  Watch curated videos on governance, learning, and community insights.<br />
+  Explore content that keeps you informed, skilled, and engaged.
+</p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-3xl mb-12">
             <div className="relative flex-1">
               <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400" size={24} />

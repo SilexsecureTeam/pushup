@@ -19,10 +19,10 @@ export default function Mentors() {
         <div className="absolute inset-0 bg-black/60"></div>
 
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 text-white">
-          <h1 className="text-3xl md:text-5xl font-extrabold mb-6">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
             Meet Our Mentors
           </h1>
-          <p className="text-xl md:text-2xl max-w-4xl leading-relaxed">
+          <p className="text-2xl md:text-2xl max-w-4xl leading-relaxed">
             Connect with experienced mentors dedicated to helping you grow your skills, 
             navigate your career, and unlock new opportunities.
           </p>
@@ -34,12 +34,12 @@ export default function Mentors() {
           <h2 className="text-3xl md:text-4xl font-semibold text-[#358307] mb-6">
             Meet Our Mentors
           </h2>
-          <p className="text-2xl md:text-3xl font-semibold text-[#333333] mb-16 max-w-5xl mx-auto">
+          <p className="text-2xl md:text-3xl font-semibold text-[#333333] mb-16 max-w-5xl  mx-auto">
             We're proud to have a diverse team of experienced professionals committed 
             to guiding you on your growth journey.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-10 max-w-5xl mx-auto">
             {[
               { name: "Victor Okafor", title: "Google Analytics Advisor" },
               { name: "Victor Okafor", title: "Google Analytics Advisor" },
@@ -54,7 +54,7 @@ export default function Mentors() {
                 className="block"
               >
                 <div className="group cursor-pointer transform hover:scale-105 transition-all duration-300">
-                  <div className="relative overflow-hidden rounded-3xl shadow-xl">
+                  <div className="relative overflow-hidden rounded-xl shadow-xl">
                     <img
                       src={`/mentor-${i + 1}.png`}
                       alt={mentor.name}
@@ -62,7 +62,7 @@ export default function Mentors() {
                     />
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent pt-20 pb-6">
                       <div className="px-6">
-                        <span className="inline-block bg-[#622737] text-white text-xs px-4 py-2 rounded-full mb-3">
+                        <span className="inline-block bg-[#622737] text-white text-xs px-4 py-2 rounded-md mb-3">
                           {mentor.title}
                         </span>
                         <h3 className="text-xl font-bold text-white">{mentor.name}</h3>

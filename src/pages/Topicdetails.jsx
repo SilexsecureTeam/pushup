@@ -1,5 +1,5 @@
 import React from "react";
-import { Search, MessageCircle, Eye, ThumbsUp, ArrowRight, Plus } from "lucide-react";
+import { Search, MessageCircle, Eye, ThumbsUp, ArrowRight, Plus, Check, ChevronDown, User } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -8,172 +8,198 @@ export default function Forum() {
     <>
       <Navbar />
 
-      
-      <section className="pt-32 pb-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="pt-32 pb-20 bg-gradient-to-br from-pink-50 via-white to-pink-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           
-          <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-12">
+          {/* Header */}
+          <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-10 mb-8">
             <div>
-              <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                 Welcome to the Forum
               </h1>
-              <p className="text-xl text-gray-600 max-w-3xl">
+              <p className="text-base sm:text-lg text-gray-600 max-w-xl">
                 A space where Nigerians connect, learn, ask questions, share insights, and get support on governance, skills, and mentorship.
               </p>
             </div>
 
-            <div className="flex flex-col gap-6">
-              <button className="bg-green-600 hover:bg-green-700 text-white px-10 py-5 rounded-full font-bold flex items-center justify-center gap-3 transition">
-                <Plus size={24} /> Start a conversation
-              </button>
-
-              <div className="flex items-center gap-3">
-                <span className="text-gray-600">Browse by topic</span>
-                <ArrowRight className="text-green-600" size={20} />
-              </div>
-            </div>
+            <button className="bg-[#1E6A00] hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold flex items-center justify-center gap-2 transition text-sm whitespace-nowrap">
+              Start a conversation
+            </button>
           </div>
 
-          
-          <div className="grid lg:grid-cols-4 gap-10">
+          {/* Main Grid */}
+          <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
            
-            <div className="lg:col-span-3">
+            {/* Main Content */}
+            <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm">
              
-              <div className="relative mb-8">
-                <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400" size={24} />
-                <input
-                  type="text"
-                  placeholder="Search the community"
-                  className="w-full pl-16 pr-6 py-5 rounded-full border border-gray-300 focus:outline-none focus:border-green-600 text-lg"
-                />
-              </div>
-
-              <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-8 pb-6 border-b border-gray-200">
-                <div className="flex items-center gap-3">
-                  <button className="px-4 py-2 bg-gray-100 rounded-lg">&lt; Back</button>
-                  <div className="flex gap-2">
-                    {[1, 2, 3, 4, 5, 6].map((n) => (
-                      <button key={n} className={`px-4 py-2 rounded-lg ${n === 1 ? "bg-green-600 text-white" : "bg-gray-100"}`}>
-                        {n}
-                      </button>
-                    ))}
-                    <span className="px-4 py-2">...</span>
-                    <button className="px-4 py-2 bg-gray-100 rounded-lg">25</button>
-                  </div>
-                  <button className="px-4 py-2 bg-gray-100 rounded-lg">Next &gt;</button>
+              {/* Pagination Top */}
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-gray-200">
+                <div className="flex items-center gap-2 flex-wrap">
+                  {[1, 2, 3, 4, 5, 6].map((n) => (
+                    <button 
+                      key={n} 
+                      className={`px-3 py-1.5 rounded-md text-sm font-medium transition ${
+                        n === 1 ? "bg-[#1E6A00] text-white" : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                      }`}
+                    >
+                      {n}
+                    </button>
+                  ))}
+                  <span className="px-2 text-gray-500">...</span>
+                  <button className="px-3 py-1.5 bg-gray-100 rounded-md text-sm hover:bg-gray-200 transition text-gray-700">25</button>
+                  <button className="px-3 py-1.5 bg-gray-100 rounded-md text-sm hover:bg-gray-200 transition text-gray-700">
+                    Next &gt;
+                  </button>
                 </div>
-                <div className="text-sm text-gray-600">1–50 of 1,250</div>
-                <div className="flex gap-4">
-                  <select className="px-6 py-3 border border-gray-300 rounded-lg text-sm">
-                    <option>SORT</option>
-                  </select>
-                  <select className="px-6 py-3 border border-gray-300 rounded-lg text-sm">
-                    <option>FILTER BY</option>
-                  </select>
+                
+                <div className="flex items-center gap-3 flex-wrap w-full sm:w-auto">
+                  <span className="text-xs text-gray-500 whitespace-nowrap">1-50 of 1,250</span>
+                  <button className="px-3 py-1.5 border border-gray-300 rounded-md text-xs font-medium hover:bg-gray-50 transition flex items-center gap-2">
+                    SORT <ChevronDown size={14} />
+                  </button>
+                  <button className="px-3 py-1.5 border border-gray-300 rounded-md text-xs font-medium hover:bg-gray-50 transition flex items-center gap-2">
+                    FILTER BY <ChevronDown size={14} />
+                  </button>
                 </div>
               </div>
 
-              
-              <div className="space-y-6">
+              {/* Forum Posts */}
+              <div className="space-y-3">
                 {[...Array(7)].map((_, i) => (
-                  <div key={i} className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition">
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
-                      Understanding New Civic Policies – October 2025
+                  <div key={i} className="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition cursor-pointer">
+                    <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-2">
+                      Understanding New Civic Policies — October 2025
                     </h3>
-                    <p className="text-gray-600 mb-4">
-                      Posted by <span className="font-medium">PolicyTeam</span> — 2.1k views — Latest reply Sunday 4:20 PM
+                    <p className="text-xs text-gray-600 mb-3">
+                      Posted by <span className="font-semibold">PolicyTeam</span> — 2.1k views — Latest reply Sunday 4:20 PM
                     </p>
-                    <div className="flex items-center gap-6 text-gray-500">
-                      <span className="flex items-center gap-2">
-                        <MessageCircle size={20} /> 156k
+                    <div className="flex items-center gap-4 text-gray-500 text-xs mb-3">
+                      <span className="flex items-center gap-1.5">
+                        <MessageCircle size={14} /> 156k
                       </span>
-                      <span className="flex items-center gap-2">
-                        <Eye size={20} /> 10k
+                      <span className="flex items-center gap-1.5">
+                        <Eye size={14} /> 10k
                       </span>
-                      <span className="flex items-center gap-2">
-                        <ThumbsUp size={20} /> 1k
+                      <span className="flex items-center gap-1.5">
+                        <ThumbsUp size={14} /> 1k
                       </span>
                     </div>
-                    <div className="flex items-center justify-between mt-6">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center text-white font-bold">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center text-white font-bold text-xs">
                           M
                         </div>
                         <div>
-                          <p className="font-medium text-gray-900">Mayokun Obi</p>
-                          <p className="text-sm text-gray-500">Last reply Nov 5</p>
+                          <p className="font-semibold text-gray-900 text-xs">Mayokun Obi</p>
+                          <p className="text-xs text-gray-500">Last reply Nov 5</p>
                         </div>
                       </div>
-                      <div className="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-bold">
-                        Active
+                      <div className="bg-green-600 text-white w-8 h-8 rounded-md flex items-center justify-center text-sm font-bold">
+                        Ω
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
 
-             
-              <div className="mt-12 flex justify-center">
-                <div className="flex items-center gap-3">
-                  <button className="px-4 py-2 bg-gray-100 rounded-lg">&lt; Back</button>
-                  <div className="flex gap-2">
-                    {[1, 2, 3, 4, 5, 6].map((n) => (
-                      <button key={n} className={`px-4 py-2 rounded-lg ${n === 1 ? "bg-green-600 text-white" : "bg-gray-100"}`}>
-                        {n}
-                      </button>
-                    ))}
-                    <span className="px-4 py-2">...</span>
-                    <button className="px-4 py-2 bg-gray-100 rounded-lg">25</button>
-                  </div>
-                  <button className="px-4 py-2 bg-gray-100 rounded-lg">Next &gt;</button>
+              {/* Pagination Bottom */}
+              <div className="mt-6 pt-4 border-t border-gray-200 flex justify-center">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <button className="px-3 py-1.5 bg-gray-100 rounded-md text-sm hover:bg-gray-200 transition text-gray-700">
+                    Back
+                  </button>
+                  {[1, 2, 3, 4, 5, 6].map((n) => (
+                    <button 
+                      key={n} 
+                      className={`px-3 py-1.5 rounded-md text-sm font-medium transition ${
+                        n === 1 ? "bg-[#1E6A00] text-white" : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                      }`}
+                    >
+                      {n}
+                    </button>
+                  ))}
+                  <span className="px-2 text-gray-500">...</span>
+                  <button className="px-3 py-1.5 bg-gray-100 rounded-md text-sm hover:bg-gray-200 transition text-gray-700">25</button>
+                  <button className="px-3 py-1.5 bg-gray-100 rounded-md text-sm hover:bg-gray-200 transition text-gray-700">
+                    Next &gt;
+                  </button>
                 </div>
               </div>
             </div>
 
-            
-            <div className="space-y-8">
+            {/* Sidebar */}
+            <div className="space-y-4">
              
-              <div className="bg-gray-50 rounded-3xl p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-2xl">Welcome to the forum</span>
-                  <span className="text-green-600 font-bold">600</span>
+              {/* Search */}
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                <input
+                  type="text"
+                  placeholder="Search the community"
+                  className="w-full pl-11 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-green-600 text-sm bg-white"
+                />
+              </div>
+
+              {/* Browse by Topic */}
+              <div className="bg-white border border-gray-200 rounded-xl p-5">
+                <div className="flex items-center gap-2 mb-4">
+                  <User size={18} className="text-gray-700" />
+                  <span className="text-base font-bold text-gray-900">Browse by topic</span>
                 </div>
-                <div className="space-y-4 text-gray-600">
-                  <div className="flex items-center gap-3">
-                    <Check className="text-green-600" size={20} />
-                    <span>Forum resources</span>
-                    <span className="ml-auto font-bold text-green-600">10</span>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between py-2 hover:bg-gray-50 rounded px-2 -mx-2 cursor-pointer transition">
+                    <div className="flex items-center gap-2">
+                      <Check className="text-green-600" size={16} />
+                      <span className="text-sm text-gray-700">Welcome to the forum</span>
+                    </div>
+                    <span className="text-sm font-bold text-gray-900">600</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Check className="text-green-600" size={20} />
-                    <span>What's new at Pushup.ng</span>
-                    <span className="ml-auto font-bold text-green-600">30</span>
+                  <div className="flex items-center justify-between py-2 hover:bg-gray-50 rounded px-2 -mx-2 cursor-pointer transition">
+                    <div className="flex items-center gap-2">
+                      <Check className="text-green-600" size={16} />
+                      <span className="text-sm text-gray-700">Forum resources</span>
+                    </div>
+                    <span className="text-sm font-bold text-gray-900">10</span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Check className="text-green-600" size={20} />
-                    <span>Getting started with Pushup.ng</span>
-                    <span className="ml-auto font-bold text-green-600">60</span>
+                  <div className="flex items-center justify-between py-2 hover:bg-gray-50 rounded px-2 -mx-2 cursor-pointer transition">
+                    <div className="flex items-center gap-2">
+                      <Check className="text-green-600" size={16} />
+                      <span className="text-sm text-gray-700">What's new at Pushup.ng</span>
+                    </div>
+                    <span className="text-sm font-bold text-gray-900">30</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2 hover:bg-gray-50 rounded px-2 -mx-2 cursor-pointer transition">
+                    <div className="flex items-center gap-2">
+                      <Check className="text-green-600" size={16} />
+                      <span className="text-sm text-gray-700">Getting started with Pushup.ng</span>
+                    </div>
+                    <span className="text-sm font-bold text-gray-900">60</span>
                   </div>
                 </div>
               </div>
 
-            
-              <div className="bg-white rounded-3xl p-8 border border-gray-200">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Popular Contributors</h3>
-                <div className="flex gap-3 mb-8">
-                  <button className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-bold">Week</button>
-                  <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm">Month</button>
-                  <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm">Year</button>
-                  <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm">All Time</button>
+              {/* Popular Contributors */}
+              <div className="bg-white border border-gray-200 rounded-xl p-5">
+                <h3 className="text-base font-bold text-gray-900 mb-3">Popular Contributors</h3>
+                <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
+                  <button className="bg-[#1E6A00] text-white px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap">Week</button>
+                  <button className="bg-gray-100 text-gray-700 px-4 py-1.5 rounded-full text-xs hover:bg-gray-200 transition whitespace-nowrap">Month</button>
+                  <button className="bg-gray-100 text-gray-700 px-4 py-1.5 rounded-full text-xs hover:bg-gray-200 transition whitespace-nowrap">Year</button>
+                  <button className="bg-gray-100 text-gray-700 px-4 py-1.5 rounded-full text-xs hover:bg-gray-200 transition whitespace-nowrap">All Time</button>
                 </div>
-                <div className="space-y-6">
+                <div className="space-y-3">
                   {[...Array(4)].map((_, i) => (
-                    <div key={i} className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-gray-300 rounded-full"></div>
+                    <div key={i} className="flex items-center gap-3">
+                      <img
+                        src="/avarta.png"
+                        alt="Contributor"
+                        className="w-10 h-10 rounded-full object-cover"
+                      />
                       <div className="flex-1">
-                        <p className="font-bold text-gray-900">Amaka</p>
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                          <span className="bg-gray-200 px-3 py-1 rounded-full">300</span>
+                        <p className="font-semibold text-gray-900 text-sm">Amaka</p>
+                        <div className="flex items-center gap-1 text-xs text-gray-500 mt-0.5">
+                          <span className="bg-gray-100 px-2 py-0.5 rounded">300</span>
                         </div>
                       </div>
                     </div>

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   PlayCircle,
   BrainCircuit,
@@ -18,22 +19,35 @@ import Footer from "../components/Footer";
 
 export default function HomePage() {
   const features = [
-    { icon: PlayCircle, color: "bg-[#1E6A00]", title: "Streaming", desc: "Watch civic events live" },
+    { icon: PlayCircle, color: "bg-[#1E6A00]", title: "Streaming ", desc: "Watch civic events live" },
     { icon: BrainCircuit, color: "bg-[#EF2955]", title: "Learning", desc: "Browse Courses" },
     { icon: Users, color: "bg-[#334209]", title: "Mentorship", desc: "Connect with mentors" },
     { icon: ShieldCheck, color: "bg-[#622737]", title: "Trust & Authority", desc: "Verified content only" },
   ];
 
   const liveEvents = [
-    { tag: "GOVERNANCE", tagBg: "bg-[#1E6A00]", title: "Policy Debate in Nigeria", host: "@kenbenjamin", img: "/live1.png", cardBg: "bg-[#d3e4cd]" },
+    { tag: "GOVERNANCE", tagBg: "bg-[#1E6A00] text-white", title: "Policy Debate in Nigeria", host: "@kenbenjamin", img: "/live1.png", cardBg: "bg-[#d3e4cd]" },
     { tag: "LIFESTYLE", tagBg: "bg-[#1E6A00] text-white", title: "Morning Routines that work", host: "@Benita Ojo", img: "/live2.png", cardBg: "bg-[#d3e4cd]" },
   ];
 
-  const videos = Array.from({ length: 6 }, (_, i) => ({
-    img: `/video-${((i % 4) + 1)}.png`,
-    title: "Nigeria's Budget 2026 Explained",
-    meta: i % 2 === 0 ? "8.7K views" : "18 minutes",
-  }));
+  const videos = [
+    { img: "/video-1.png", title: "Nigeria's Budget 2026 Explained", meta: "18 minutes", category: "Governance" },
+    { img: "/video-2.png", title: "Leadership in Crisis", meta: "8.7K views", category: "Leadership" },
+    { img: "/video-3.png", title: "Mentorship Stories from Experts", meta: "12 minutes", category: "Mentorship" },
+    { img: "/video-4.png", title: "Governance Reforms in Nigeria", meta: "10K views", category: "Governance" },
+    { img: "/video-1.png", title: "Building Strong Leaders", meta: "15 minutes", category: "Leadership" },
+    { img: "/video-3.png", title: "Mentor-Student Success Stories", meta: "9.2K views", category: "Mentorship" },
+  ];
+  
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filteredVideos = videos.filter((v) => {
+    if (activeFilter === "All") return true; 
+    if (activeFilter === "Governance") return v.title.includes("Governance");
+    if (activeFilter === "Leadership") return v.title.includes("Leadership");
+    if (activeFilter === "Mentorship") return v.title.includes("Mentorship");
+    return true; 
+  });
 
   const courses = [
     { img: "/course-1.png", author: "David Chucks", title: "Content Marketing", weeks: "8 Weeks • Intermediate", desc: "What is Content Marketing? Content marketing is the process of creating and distributing valuable, relevant, and consistent content to attract and retain a clearly defined audience — and ultimately drive profitable customer action. Blogs, videos, social media posts, and podcasts are all examples of content marketing in action." },
@@ -62,34 +76,35 @@ export default function HomePage() {
     <>
       <Navbar />
 
-      {/* Hero */}
-      <section className="relative h-screen pt-20 overflow-hidden">
+       {/* Hero - Fixed vertical centering */}
+      <section className="relative h-screen pt-20 overflow-hidden flex items-center">
         <img src="/homebg.png" alt="Hero" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/50" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 h-full flex flex-col justify-center">
-          <div className="max-w-4xl">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-8">
-              Empowering Nigerians<br />Through Learning and Civic<br />Insight
-            </h1>
-            <a href="#" className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 sm:px-12 sm:py-6 rounded-full font-bold text-lg sm:text-xl transition shadow-2xl">
-              Explore PushUp.ng
-            </a>
-          </div>
-        </div>
-
-        {/* Bottom Feature Cards */}
-        <div className="absolute bottom-0 left-0 right-0 pb-10">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 bg-white/10 backdrop-blur-md rounded-3xl p-6 sm:p-8">
+        <div className="relative z-10 w-full">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="absolute left-[82px] top-[50px] w-[737px]">
+      <h1 className="font-semibold text-[48px] leading-[60px] text-white mb-6 sm:mb-8">
+        Empowering Nigerians<br />Through Learning and Civic<br />Insight
+      </h1>
+      <a href="About" className="inline-block bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white px-8 sm:px-10 md:px-12 py-3 sm:py-4 md:py-5 rounded-xl font-semibold text-base sm:text-lg transition shadow-2xl hover:shadow-green-500/50">
+        Explore PushUp.ng
+      </a>
+    </div>
+  </div>
+</div>
+        {/* Bottom Feature Cards - Fixed positioning */}
+        <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 left-0 right-0 z-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 bg-green/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl">
               {features.map((f, i) => (
-                <div key={i} className="flex items-center gap-3 sm:gap-4 text-white">
-                  <div className={`${f.color} p-3 sm:p-4 rounded-xl`}>
-                    <f.icon className="w-7 h-7 sm:w-9 sm:h-9" />
+                <div key={i} className="flex items-center gap-3 sm:gap-4">
+                  <div className={`${f.color} p-4 sm:p-5 rounded-xl flex-shrink-0`}>
+                    <f.icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-sm sm:text-base">{f.title}</h3>
-                    <p className="text-xs sm:text-sm opacity-90">{f.desc}</p>
+                    <h3 className="font-semibold text-sm sm:text-base md:text-lg text-white">{f.title}</h3>
+                    <p className="text-xl sm:text-sm text-white">{f.desc}</p>
                   </div>
                 </div>
               ))}
@@ -98,175 +113,261 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Live Now & Upcoming */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-4">
-            <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900">Live Now & Upcoming</h2>
-              <p className="text-[#333333] text-2xl mt-2">Live streams, courses, mentors, and more.</p>
-            </div>
-            <div className="flex items-center gap-4 text-lg">
-              <a href="#" className="flex items-center gap-2 text-gray-500"><SlidersHorizontal size={20} /> Filter</a>
-              <span className="hidden sm:block w-px h-8 bg-gray-400"></span>
-              <a href="#" className="font-semibold flex items-center gap-2 hover:underline">See All <ArrowRight size={20} /></a>
-            </div>
-          </div>
+<section className="py-12 sm:py-16 md:py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 sm:mb-10 gap-4">
+      <div>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Live Now & Upcoming</h2>
+        <p className="text-gray-600 text-base sm:text-lg md:text-xl mt-2">Live streams, courses, mentors, and more.</p>
+      </div>
+      <div className="flex items-center gap-3 sm:gap-4 text-sm sm:text-base flex-wrap">
+        <a href="#" className="flex items-center gap-2 text-gray-500 hover:text-gray-700"><SlidersHorizontal size={18} className="sm:w-5 sm:h-5" /> Filter</a>
+        <span className="hidden sm:block w-px h-6 sm:h-8 bg-gray-300"></span>
+        <a href="Live" className="font-semibold flex items-center gap-2 text-[#1E6A00] hover:underline">See All <ArrowRight size={18} className="sm:w-5 sm:h-5" /></a>
+      </div>
+    </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {liveEvents.map((event, i) => (
-              <div key={i} className={`${event.cardBg} rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row`}>
-                <div className="p-8 md:p-12 flex flex-col justify-between text-[#333333] order-2 md:order-1">
-                  <div>
-                    <span className={`inline-block ${event.tagBg} px-8 py-4 rounded-full font-bold text-xl sm:text-2xl mb-6`}>
-                      {event.tag}
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">{event.title}</h3>
-                  </div>
-                  <p className="text-lg sm:text-xl mt-8 flex items-center gap-4">
-                    Watch now <MessageCircle size={28} /> {event.host}
-                  </p>
+    {/* Live Events Container with exact Figma specs */}
+    <div className="absolute  w-[1284px] h-[372px]  flex flex-col justify-start gap-[10px] mb-8 sm:mb-12">
+      <div className="flex flex-row gap-6">
+        {liveEvents.map((event, i) => (
+          <div key={i} className={`${event.cardBg} rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition flex flex-row items-stretch h-[372px] `}>
+            {/* Text Content - Left Side */}
+            <div className="w-1/2 p-6 sm:p-8 md:p-10 flex flex-col justify-center text-[#333333]">
+              <div>
+                <span className={`inline-block ${event.tagBg} px-4 sm:px-6 py-2 sm:py-2.5 font-bold text-sm sm:text-base mb-4 sm:mb-5 rounded`}>
+                  {event.tag}
+                </span>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight mb-4">{event.title}</h3>
+              </div>
+              <div className="flex items-center gap-4 text-base sm:text-lg text-gray-700">
+                <div className="flex items-center gap-2">
+                  <Eye size={20} className="sm:w-5 sm:h-5" /> 
+                  <span className="font-medium">Watch now</span>
                 </div>
-                <div className="relative order-1 md:order-2">
-                  <img src={event.img} alt={event.title} className="w-full h-64 md:h-full object-cover" />
-                  <span className="absolute top-4 left-4 bg-red-600 text-white px-6 py-3 rounded-full font-bold">LIVE</span>
+                <div className="flex items-center gap-2">
+                  <Users size={20} className="sm:w-5 sm:h-5" /> 
+                  <span className="font-medium">{event.host}</span>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
 
-          <div className="flex justify-start gap-4">
-            <button className="bg-white p-4 sm:p-6 rounded-full shadow-2xl hover:bg-gray-100"><ArrowLeft className="w-8 h-8 sm:w-12 sm:h-12 text-gray-600" /></button>
-            <button className="bg-white p-4 sm:p-6 rounded-full shadow-2xl hover:bg-gray-100"><ArrowRight className="w-8 h-8 sm:w-12 sm:h-12 text-gray-600" /></button>
+            {/* Image - Right Side */}
+            <div className="relative w-1/2">
+              <img src={event.img} alt={event.title} className="w-full h-full object-cover" />
+              <span className="absolute top-3 sm:top-4 right-4 sm:right-4 bg-red-600 text-white px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-lg font-bold text-xs sm:text-sm flex items-center gap-2">
+                <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                LIVE
+              </span>
+            </div>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </div>
+
+    <div className="flex justify-start gap-3 sm:gap-4 mt-[480px]">
+      <button className="bg-white border-2 border-[#1E6A00] p-3 sm:p-4 rounded-lg hover:bg-gray-50 hover:border-[#1E6A00] transition">
+        <ArrowLeft className="w-6 h-6 sm:w-7 sm:h-7 text-[#2d3a08]" />
+      </button>
+      <button className="bg-white border-2 border-[#1E6A00] p-3 sm:p-4 rounded-lg hover:bg-gray-50 hover:border-[#1E6A00] transition">
+        <ArrowRight className="w-6 h-6 sm:w-7 sm:h-7 text-[#2d3a08]" />
+      </button>
+    </div>
+  </div>
+</section>
 
       {/* About */}
-      <section className="py-20 bg-[#334209] text-white">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <section className="py-12 sm:py-16 md:py-20 bg-[#334209] text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-16 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 relative inline-block pb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 relative inline-block pb-3 sm:pb-4">
               About PushUp.ng
-              <span className="absolute bottom-0 left-0 w-32 h-2 bg-white rounded-full"></span>
+              <span className="absolute bottom-0 left-0 w-24 sm:w-32 h-1.5 sm:h-2 bg-white rounded-full"></span>
             </h2>
-            <p className="text-xl opacity-90 mb-6">Empowering Learning, Mentorship, and Civic Engagement</p>
-            <p className="text-lg leading-relaxed mb-8">
+            <p className="text-lg sm:text-xl md:text-2xl opacity-90 mb-4 sm:mb-6">Empowering Learning, Mentorship, and Civic Engagement</p>
+            <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-6 sm:mb-8">
               PushUp.ng is Africa's premier digital hub for learning, mentorship, civic engagement, and professional streaming.
-               Our platform empowers individuals, organizations, and communities to access high-quality multimedia content, connect with mentors,
-                and engage in meaningful civic discussions — all in one seamless digital experience.
+              Our platform empowers individuals, organizations, and communities to access high-quality multimedia content, connect with mentors,
+              and engage in meaningful civic discussions — all in one seamless digital experience.
             </p>
-            <p className="text-lg leading-relaxed mb-10">
+            <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-8 sm:mb-10">
               From live events and on-demand videos to online courses and mentorship programs, PushUp.ng is designed to inspire growth, foster learning, 
               and facilitate connections. Citizens and policymakers can stay informed through our governance media hub, while professionals and students can
-               access verified mentors and skill-building resources.
+              access verified mentors and skill-building resources.
             </p>
-            <button className="bg-white text-[#334209] px-10 py-5 rounded-full font-bold text-lg hover:bg-gray-100">Learn more</button>
+            <button className="bg-white text-[#333333] px-8 sm:px-12 md:px-16 py-3 sm:py-4 md:py-5 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg md:text-xl hover:bg-gray-100">Learn more</button>
           </div>
-          <img src="/image1.png" alt="About" className="rounded-3xl shadow-2xl w-full object-cover" />
+          <img src="/image1.png" alt="About" className="rounded-2xl sm:rounded-3xl shadow-2xl w-full object-cover" />
         </div>
       </section>
 
-      {/* Most Viewed Videos */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-12 gap-6">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Most Viewed Videos</h2>
-              <p className="text-gray-600 mt-2">
-                Discover governance insights, leadership talks,<br className="hidden lg:block" />
-                mentorship stories, and expert lessons — available on demand.
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-4">
-              <a href="#" className="bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white px-8 py-4 rounded-full font-bold">See All</a>
-              <div className="flex gap-6 text-gray-700 font-medium">
-                <span className="hover:text-black cursor-pointer">Governance</span>
-                <span className="hover:text-black cursor-pointer">Leadership</span>
-                <span className="hover:text-black cursor-pointer">Mentorship</span>
-              </div>
-            </div>
-          </div>
+     <section className="py-12 sm:py-16 md:py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 sm:mb-10 md:mb-12 gap-4 sm:gap-6">
+  <div>
+    <h2 className="text-4xl sm:text-3xl md:text-4xl font-bold text-[#333333]">Most Viewed Videos</h2>
+    <p className="text-[#333333] mt-2 text-3xl sm:text-base md:text-lg">
+      Discover governance insights, leadership talks, mentorship stories, and expert lessons — available on demand.
+    </p>
+  </div>
+  
+  {/* Fixed Filter Section */}
+  <div className="flex items-center gap-4 sm:gap-4 w-full lg:w-auto">
+    <div className="flex items-center gap-3 sm:gap-4 md:gap-6 text-[#333333] font-medium px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-full border-2 border-gray-300 bg-white text-sm sm:text-base whitespace-nowrap">
+      <a 
+        href="Videos" 
+        onClick={() => setActiveFilter("All")}
+        className={`cursor-pointer px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full transition font-bold ${
+          activeFilter === "All"
+            ? "bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white"
+            : "hover:bg-gray-100"
+        }`}
+      >
+        See All
+      </a>
+      {["Governance", "Leadership", "Mentorship"].map((filter) => (
+        <span
+          key={filter}
+          onClick={() => setActiveFilter(filter)}
+          className={`cursor-pointer transition ${
+            activeFilter === filter
+              ? "font-bold text-black"
+              : "hover:text-black"
+          }`}
+        >
+          {filter}
+        </span>
+      ))}
+    </div>
+  </div>
+</div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+  {filteredVideos.map((v, i) => (
+    <div 
+  key={i} 
+  className="group flex flex-row items-start gap-4 bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 cursor-pointer h-[180px]"
+>
+  <div className="flex-shrink-0 w-52 sm:w-60 md:w-72">
+    <div className="relative overflow-hidden aspect-video rounded-l-xl sm:rounded-l-2xl">
+      <img 
+        src={v.img} 
+        alt={v.title} 
+        className="w-full h-full object-cover group-hover:scale-105 transition duration-300" 
+      />
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition" />
+    </div>
+  </div>
 
-          {/* Perfect grid: 2 on mobile, 3 on md, 6 on lg */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-6 lg:gap-8">
-            {videos.map((v, i) => (
-              <div key={i} className="group cursor-pointer">
-                <div className="relative overflow-hidden rounded-2xl shadow-lg aspect-video">
-                  <img src={v.img} alt="Video" className="w-full h-full object-cover group-hover:scale-110 transition duration-300" />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition"></div>
-                </div>
-                <h4 className="mt-4 font-bold text-base lg:text-lg line-clamp-2">{v.title}</h4>
-                <p className="text-sm text-gray-600">{v.meta} • 1 day ago</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+  <div className="flex-1 py-4 pr-5">
+    <h4 className="font-bold text-base sm:text-lg md:text-xl mb-2">
+      {v.title}
+    </h4>
+    <p className="text-sm sm:text-base text-gray-600 mb-1">
+      {v.meta}
+    </p>
+    <p className="text-sm sm:text-base text-gray-500">
+      1 day ago
+    </p>
+  </div>
+</div>
+  ))}
+
+    </div>
+  </div>
+</section>
 
       {/* Governance Media Hub */}
-      <section className="py-20 bg-[#d3e4cd]">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-          <div className="text-[#333333]">
-            <h1 className="text-3xl md:text-4xl font-bold mb-8 relative inline-block pb-4">
-              Governance Media Hub
-              <span className="absolute bottom-0 left-0 w-32 h-2 bg-[#1E6A00] rounded-full"></span>
-            </h1>
-            <h2 className="text-xl font-semibold mb-6 text-[#333333]">Policy & Public Affairs</h2>
-            <p className="text-lg leading-relaxed mb-10">
-              The Governance Media Hub gives users a front-row seat to the nation's most important civic moments. 
-              From parliamentary sessions and national addresses to policy debates and public forums, this space is designed to help citizens stay informed, engaged, and empowered.
-               Every video is carefully curated and verified, offering clear insight into decisions, reforms, and discussions shaping Nigeria's future. Whether you're a student, professional,
-                policymaker, or simply a curious citizen, the Governance Hub brings transparency closer — helping you understand how governance works, why it matters, and how it impacts your everyday life.
-            </p>
- 
-            <button className="bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-green-800">
-              Learn more
-            </button>
-          </div>
-          <div className="space-y-8">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-              <img src="/assembly.png" alt="Assembly" className="w-full h-96 object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-              <div className="absolute top-6 left-6 right-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">National Assembly Budget Presentation 2026</h3>
-                <div className="flex items-center gap-4">
-                  <span className="flex items-center gap-2"><span className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>Live Now</span>
-                  <span className="text-sm opacity-90">Nov 20, 2025 10:00AM</span>
+      <section className="py-12 sm:py-16 md:py-20 bg-[#d3e4cd]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-start mb-8 sm:mb-10 lg:mb-12">
+            <div className="text-[#333333]">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 relative inline-block pb-3 sm:pb-4">
+                Governance Media Hub
+                <span className="absolute bottom-0 left-0 w-24 sm:w-32 h-1.5 sm:h-2 bg-[#1E6A00] rounded-full"></span>
+              </h1>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6">Policy & Public Affairs</h2>
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-6 sm:mb-8">
+                The Governance Media Hub gives users a front-row seat to the nation's most important civic moments. 
+                From parliamentary sessions and national addresses to policy debates and public forums, this space is designed 
+                to help citizens stay informed, engaged, and empowered.
+              </p>
+              <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-8 sm:mb-10">
+                Every video is carefully curated and verified, offering clear insight into decisions, reforms, and discussions 
+                shaping Nigeria's future. Whether you're a student, professional, policymaker, or simply a curious citizen, 
+                the Governance Hub brings transparency closer — helping you understand how governance works, why it matters, 
+                and how it impacts your everyday life.
+              </p>
+              <button className="bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white px-8 sm:px-12 md:px-16 py-3 sm:py-4 md:py-5 rounded-xl font-bold text-base sm:text-lg md:text-xl hover:bg-green-800 transition">
+                Learn more
+              </button>
+            </div>
+
+            <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
+              <img 
+                src="/assembly.png" 
+                alt="National Assembly Budget Presentation 2026" 
+                className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] object-cover" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+              <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 text-white">
+                <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3 leading-tight">
+                  National Assembly Budget Presentation 2026
+                </h3>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 md:gap-6 text-xs sm:text-sm md:text-base">
+                  <span className="flex items-center gap-2 font-semibold">
+                    <span className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full animate-pulse"></span> Live Now
+                  </span>
+                  <span className="opacity-90">Nov 20, 2025 10:00AM</span>
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <img key={i} src={`/governance${i}.png`} alt="Governance" className="rounded-3xl shadow-xl w-full h-48 object-cover hover:scale-105 transition" />
-              ))}
-            </div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+            {[1, 2, 3].map((i) => (
+              <div 
+                key={i} 
+                className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl group cursor-pointer"
+              >
+                <img 
+                  src={`/governance${i}.png`} 
+                  alt={`Governance event ${i}`} 
+                  className="w-full h-32 sm:h-40 md:h-48 lg:h-56 xl:h-64 object-cover transition-transform duration-300 group-hover:scale-105" 
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Explore Courses */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold mb-8 relative inline-block pb-4">
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 relative inline-block pb-3 sm:pb-4">
             Explore Courses That Transform
-            <span className="absolute bottom-0 left-0 w-32 h-2 bg-green-600 rounded-full"></span>
+            <span className="absolute bottom-0 left-0 w-24 sm:w-32 h-1.5 sm:h-2 bg-green-600 rounded-full"></span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-12">
+          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-4xl mx-auto mb-8 sm:mb-10 md:mb-12">
             Explore a wide range of expert-led courses designed to help you build practical skills and deepen your understanding of key topics.
-             From governance and leadership to digital marketing and personal development, each lesson is crafted to support your growth at every level.
+            From governance and leadership to digital marketing and personal development, each lesson is crafted to support your growth at every level.
           </p>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {courses.map((c, i) => (
-              <div key={i} className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition">
-                <img src={c.img} alt="Course" className="w-full h-64 object-cover" />
-                <div className="p-8">
-                  <p className="text-sm text-gray-500 mb-2">{c.weeks} • By {c.author}</p>
-                  <h3 className="text-2xl font-bold mb-4">{c.title}</h3>
-                  <p className="text-gray-600 mb-6 line-clamp-3">{c.desc}</p>
-                  <button className="w-full bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white py-4 rounded-lg font-bold hover:bg-green-700">
-                    Get This Course
-                  </button>
+              <div key={i} className="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition">
+                <img src={c.img} alt="Course" className="w-full h-48 sm:h-56 md:h-64 object-cover" />
+                <div className="p-6 sm:p-8">
+                  <p className="text-xs sm:text-sm text-[#333333] mb-3 sm:mb-4">{c.weeks} • By {c.author}</p>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4">{c.title}</h3>
+                  <p className="text-sm sm:text-base text-[#333333] mb-4 sm:mb-6 line-clamp-3">{c.desc}</p>
+                 <Link 
+  to="/Learning" 
+  className="block w-full"
+>
+  <button className="w-full bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white py-3 sm:py-4 rounded-lg font-bold hover:bg-green-700 text-sm sm:text-base transition">
+    Get This Course
+  </button>
+</Link>
                 </div>
               </div>
             ))}
@@ -275,74 +376,103 @@ export default function HomePage() {
       </section>
 
       {/* Mentors */}
-      <section className="py-20 bg-gray-100">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <section className="py-12 sm:py-16 md:py-20 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-8 relative inline-block pb-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 relative inline-block pb-3 sm:pb-4">
               Mentors Who Guide
-              <span className="absolute bottom-0 left-0 w-32 h-2 bg-[#1E6A00] rounded-full"></span>
+              <span className="absolute bottom-0 left-0 w-24 sm:w-32 h-1.5 sm:h-2 bg-[#1E6A00] rounded-full"></span>
             </h1>
-            <p className="text-xl md:text-2xl font-medium mb-8 text-[#333333]">Empowering Learning, Mentorship, and Civic Engagement</p>
-            <p className="text-xl text-[#333333] mb-12 leading-relaxed">
-              Our mentorship network connects you with experienced professionals, industry leaders, and subject-matter
-               experts who are committed to helping you grow. Whether you're seeking career direction, skill development, or clarity on your next step, these mentors bring real-world insight and actionable guidance.
+            <p className="text-lg sm:text-xl md:text-2xl font-medium mb-6 sm:mb-8 text-[#333333]">Empowering Learning, Mentorship, and Civic Engagement</p>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#333333] mb-8 sm:mb-10 md:mb-12 leading-relaxed">
+              Our mentorship network connects you with experienced professionals, industry leaders, and subject-matter experts who are committed
+              to helping you grow. Whether you're seeking career direction, skill development, or clarity on your next step, these mentors bring real-world insight and actionable guidance. Explore profiles, book sessions, and start learning directly from people who've walked the path you're on
             </p>
-            <p className="text-xl text-[#333333] mb-12 leading-relaxed">
-              Explore profiles, book sessions, and start learning directly from people who've walked
-               the path you're on. Every mentor in our network is carefully selected for their expertise, dedication, and ability to provide meaningful guidance. From one-on-one consultations to group sessions and career workshops, you can access personalized support growth...
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#333333] mb-8 sm:mb-10 md:mb-12 leading-relaxed">
+              Every mentor in our network is carefully selected for their expertise, dedication, and ability to provide meaningful guidance. From one-on-one consultations to group sessions and career workshops, you can access personalized support growth...
             </p>
-            <button className="bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white px-12 py-5 rounded-lg font-bold text-xl hover:bg-green-700">
+            <button className="bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white px-8 sm:px-10 md:px-12 py-3 sm:py-4 md:py-5 rounded-md font-semibold text-base sm:text-lg md:text-xl hover:bg-green-700">
               Start your journey today
             </button>
           </div>
-          <img src="/mentor.png" alt="Mentors" className="rounded-3xl shadow-2xl w-full object-cover" />
+          <img src="/mentor.png" alt="Mentors" className="rounded-2xl sm:rounded-3xl shadow-2xl w-full object-cover" />
         </div>
       </section>
+      {/* Join Our Community */}
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 relative inline-block pb-3 sm:pb-4">
+            Join Our Community
+            <span className="absolute bottom-0 left-0 w-24 sm:w-32 h-1.5 sm:h-2 bg-[#1E6A00] rounded-full"></span>
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium mb-6 sm:mb-8 text-[#333333]">
+            Discover what people are talking about, learn from shared experiences, and stay connected.
+          </p>
 
-      {/* Join the Community */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h1 className="text-3xl md:text-4xl font-bold mb-8 relative inline-block pb-4">
-              Join Our Community
-              <span className="absolute bottom-0 left-0 w-32 h-2 bg-[#1E6A00] rounded-full"></span>
-            </h1>
-            <p className="text-xl md:text-2xl font-medium mb-8 text-[#333333]">Discover what people are talking about, learn from shared experiences, and stay connected.</p>
-          <div className="grid md:grid-cols-2 gap-10">
-            <div className="group relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer">
-              <img src={communityStories[0].img} alt="Story" className="w-full h-full object-cover group-hover:scale-105 transition" />
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10">
+            <div className="group relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl cursor-pointer">
+              <img
+                src={communityStories[0].img}
+                alt="Story"
+                className="w-full h-full min-h-[500px] sm:min-h-[600px] object-cover group-hover:scale-105 transition duration-500"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-              <div className="absolute top-6 left-6 flex items-center gap-4 text-white">
-                <span className="bg-[#622737] px-6 py-2 rounded-full font-bold text-sm">{communityStories[0].tag}</span>
-                <span className="text-sm opacity-90">{communityStories[0].date}</span>
+              <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-white">
+                <span className="bg-[#622737] px-4 sm:px-6 py-1.5 sm:py-2 rounded-full font-bold text-xs sm:text-sm">{communityStories[0].tag}</span>
+                <span className="text-xs sm:text-sm opacity-90">{communityStories[0].date}</span>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-10 text-white">
-                <h3 className="text-3xl md:text-4xl font-extrabold mb-6">{communityStories[0].title}</h3>
-                <p className="text-lg mb-8 opacity-90">{communityStories[0].desc}</p>
-                <div className="flex items-center gap-6 text-white/80 mb-8">
-                  <span className="flex items-center gap-2"><Eye size={20} /> {communityStories[0].views}</span>
-                  <span className="flex items-center gap-2"><Heart size={20} /> {communityStories[0].likes}</span>
-                  <span className="flex items-center gap-2"><MessageCircle size={20} /> {communityStories[0].comments}</span>
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-10 text-white">
+                <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 sm:mb-6 leading-tight">
+                  {communityStories[0].title}
+                </h3>
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-10 md:mb-20 opacity-90 leading-relaxed">
+                  {communityStories[0].desc}
+                </p>
+                <div className="flex items-center gap-4 sm:gap-6 md:gap-8 text-white/80 mb-6 sm:mb-10 md:mb-20 lg:mb-40 text-sm sm:text-base">
+                  <span className="flex items-center gap-1.5 sm:gap-2">
+                    <Eye size={16} className="sm:w-5 sm:h-5" /> {communityStories[0].views}
+                  </span>
+                  <span className="flex items-center gap-1.5 sm:gap-2">
+                    <Heart size={16} className="sm:w-5 sm:h-5" /> {communityStories[0].likes}
+                  </span>
+                  <span className="flex items-center gap-1.5 sm:gap-2">
+                    <MessageCircle size={16} className="sm:w-5 sm:h-5" /> {communityStories[0].comments}
+                  </span>
                 </div>
-                <button className="bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white px-10 py-4 rounded-md font-bold hover:bg-green-700">Learn More</button>
+                <button className="bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-md font-bold hover:bg-green-700 transition text-sm sm:text-base">
+                  Learn More
+                </button>
               </div>
             </div>
 
-            <div className="space-y-10">
+            <div className="space-y-6 sm:space-y-8 md:space-y-10">
               {communityStories.slice(1).map((s, i) => (
-                <div key={i} className="group relative rounded-3xl overflow-hidden shadow-2xl cursor-pointer">
-                  <img src={s.img} alt="Story" className="w-full h-96 object-cover group-hover:scale-105 transition" />
+                <div key={i} className="group relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl cursor-pointer">
+                  <img
+                    src={s.img}
+                    alt="Story"
+                    className="w-full h-72 sm:h-80 md:h-96 lg:h-[420px] xl:h-[480px] object-cover group-hover:scale-105 transition duration-500"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                  <div className="absolute top-6 left-6 flex items-center gap-4 text-white">
-                    <span className="bg-[#622737] px-6 py-2 rounded-full font-bold text-sm">{s.tag}</span>
-                    <span className="text-sm opacity-90">{s.date}</span>
+                  <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-white">
+                    <span className="bg-[#622737] px-4 sm:px-6 py-1.5 sm:py-2 rounded-full font-bold text-xs sm:text-sm">{s.tag}</span>
+                    <span className="text-xs sm:text-sm opacity-90">{s.date}</span>
                   </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-10 text-white">
-                    <h3 className="text-2xl md:text-3xl font-extrabold mb-4">{s.title}</h3>
-                    <div className="flex items-center gap-6 text-white/80 mb-6">
-                      <span className="flex items-center gap-2"><Eye size={20} /> {s.views}</span>
-                      <span className="flex items-center gap-2"><Heart size={20} /> {s.likes}</span>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-10 text-white">
+                    <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-extrabold mb-3 sm:mb-4 leading-snug">
+                      {s.title}
+                    </h3>
+                    <div className="flex items-center gap-4 sm:gap-6 text-white/80 mb-4 sm:mb-6 text-sm sm:text-base">
+                      <span className="flex items-center gap-1.5 sm:gap-2">
+                        <Eye size={16} className="sm:w-5 sm:h-5" /> {s.views}
+                      </span>
+                      <span className="flex items-center gap-1.5 sm:gap-2">
+                        <Heart size={16} className="sm:w-5 sm:h-5" /> {s.likes}
+                      </span>
                     </div>
-                    <button className="bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white px-10 py-4 rounded-md font-bold hover:bg-green-700">Learn More</button>
+                    <button className="bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-md font-bold hover:bg-green-700 transition text-sm sm:text-base">
+                      Learn More
+                    </button>
                   </div>
                 </div>
               ))}
@@ -352,22 +482,22 @@ export default function HomePage() {
       </section>
 
       {/* Stories of Transformation */}
-      <section className="py-20 bg-green-50">
-        <div className="max-w-7xl mx-auto px-6 ">
-          <h1 className="text-3xl md:text-4xl font-bold mb-8 relative inline-block pb-4">
-              Stories of Transformation
-              <span className="absolute bottom-0 left-0 w-32 h-2 bg-[#1E6A00] rounded-full"></span>
-            </h1>
-            <p className="text-xl md:text-2xl font-medium mb-8 text-[#333333]">Real stories, real impact, hear directly from the people we've helped</p>
-          <div className="grid md:grid-cols-2 gap-10">
+      <section className="py-12 sm:py-16 md:py-20 bg-green-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 relative inline-block pb-3 sm:pb-4">
+            Stories of Transformation
+            <span className="absolute bottom-0 left-0 w-24 sm:w-32 h-1.5 sm:h-2 bg-[#1E6A00] rounded-full"></span>
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium mb-6 sm:mb-8 text-[#333333]">Real stories, real impact, hear directly from the people we've helped</p>
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10">
             {testimonials.map((t, i) => (
-              <div key={i} className="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
-                <img src={t.img} alt={t.name} className="w-full md:w-1/2 h-80 object-cover" />
-                <div className="w-full md:w-1/2 p-10 flex flex-col justify-center">
-                  <div className="text-8xl font-bold text-[#333333] mb-4 leading-none">“</div>
-                  <p className="text-xl italic text-[#333333] mb-6">{t.quote}</p>
-                  <p className="font-bold text-lg">{t.name}</p>
-                  <p className="text-gray-600">{t.role}</p>
+              <div key={i} className="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden flex flex-col">
+                <img src={t.img} alt={t.name} className="w-full h-56 sm:h-64 md:h-80 object-cover" />
+                <div className="w-full p-6 sm:p-8 md:p-10 flex flex-col justify-center">
+                  <div className="text-6xl sm:text-7xl md:text-8xl font-bold text-[#333333] mb-3 sm:mb-4 leading-none">"</div>
+                  <p className="text-base sm:text-lg md:text-xl italic text-[#333333] mb-4 sm:mb-6">{t.quote}</p>
+                  <p className="font-bold text-base sm:text-lg">{t.name}</p>
+                  <p className="text-gray-600 text-sm sm:text-base">{t.role}</p>
                 </div>
               </div>
             ))}
@@ -376,23 +506,23 @@ export default function HomePage() {
       </section>
 
       {/* Insights & Stories */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h1 className="text-3xl md:text-4xl font-bold mb-8 relative inline-block pb-4">
-              Insights & Stories
-              <span className="absolute bottom-0 left-0 w-32 h-2 bg-[#1E6A00] rounded-full"></span>
-            </h1>
-            <p className="text-xl md:text-2xl font-medium mb-8 text-[#333333]">Discover fresh perspectives, expert insights, and real stories shaping our community</p>
-          <div className="grid md:grid-cols-3 gap-10">
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 relative inline-block pb-3 sm:pb-4">
+            Insights & Stories
+            <span className="absolute bottom-0 left-0 w-24 sm:w-32 h-1.5 sm:h-2 bg-[#1E6A00] rounded-full"></span>
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium mb-8 sm:mb-10 text-[#333333]">Discover fresh perspectives, expert insights, and real stories shaping our community</p>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
             {insights.map((ins, i) => (
               <div key={i} className="group cursor-pointer">
-                <div className="rounded-3xl overflow-hidden shadow-xl mb-6">
-                  <img src={ins.img} alt={ins.title} className="w-full h-96 object-cover group-hover:scale-105 transition" />
+                <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl mb-4 sm:mb-6">
+                  <img src={ins.img} alt={ins.title} className="w-full h-64 sm:h-72 md:h-80 lg:h-96 object-cover group-hover:scale-105 transition" />
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">{ins.title}</h3>
-                <div className="flex items-center gap-4 mb-6 text-sm md:text-base text-[#333333]">
+                <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 leading-tight">{ins.title}</h3>
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 text-xs sm:text-sm md:text-base text-[#333333]">
                   <div className="flex items-center gap-2">
-                    <img src={ins.authorImg} alt={ins.author} className="w-8 h-8 rounded-full object-cover" />
+                    <img src={ins.authorImg} alt={ins.author} className="w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover" />
                     <span>{ins.author}</span>
                   </div>
                   <span>-</span>
@@ -400,8 +530,8 @@ export default function HomePage() {
                   <span>•</span>
                   <span>{ins.shares} shares</span>
                 </div>
-                <p className="text-lg leading-relaxed mb-8 text-[#333333]">{ins.desc}</p>
-                <button className="text-[#1E6A00] font-semibold text-lg hover:underline">View Post</button>
+                <p className="text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 text-[#333333]">{ins.desc}</p>
+                <button className="text-[#1E6A00] font-semibold text-base sm:text-lg hover:underline">View Post</button>
               </div>
             ))}
           </div>
