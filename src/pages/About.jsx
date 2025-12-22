@@ -9,18 +9,31 @@ export default function About() {
       <Navbar />
 
       
-      <section className="relative h-screen">
-        <img src="/about-bg.png" alt="About Us" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/40"></div>
+      {/* About Us Hero - with fade-in + slide-up animation */}
+<section className="relative h-screen flex items-center justify-center overflow-hidden">
+  {/* Background Image */}
+  <img
+    src="/about-bg.png"
+    alt="About Us background"
+    className="absolute inset-0 w-full h-full object-cover animate-kenBurns"
+  />
 
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 text-white">
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-6">About Us</h1>
-          <p className="text-2xl md:text-3xl max-w-4xl leading-relaxed">
-            We're building a more informed, skilled, and empowered Nigeria through credible civic information, 
-            meaningful learning, and community-driven mentorship.
-          </p>
-        </div>
-      </section>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black/40 animate-fadeIn" />
+
+  {/* Content */}
+  <div className="relative z-10 text-center px-6 sm:px-10 md:px-12 max-w-6xl mx-auto">
+    <div className="animate-slideUpAndFade">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 sm:mb-8 leading-tight">
+        About Us
+      </h1>
+      <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white/95 max-w-4xl mx-auto leading-relaxed">
+        We're building a more informed, skilled, and empowered Nigeria through credible civic information, 
+        meaningful learning, and community-driven mentorship.
+      </p>
+    </div>
+  </div>
+</section>
 
       
       <section className="py-20 bg-white">

@@ -1,19 +1,72 @@
+/* index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* === Custom Variables / Theme Overrides === */
 :root {
-  font-family: 'Inter', sans-serif;
-  line-height: 1.5;
-  color: #111;
-  background-color: #f9f9f9;
+  --primary: #1E6A00;       /* Your green */
+  --primary-dark: #334209;
+  --accent: #EF2955;
+  --dark: #111111;
+  --gray: #333333;
+  --light-gray: #f9f9f9;
+  --white: #ffffff;
+
+  /* Font family */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacOS, 'Segoe UI', Roboto, sans-serif;
+
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base styles */
 body {
   margin: 0;
   padding: 0;
+  font-family: var(--font-sans);
+  background-color: var(--light-gray);
+  color: var(--dark);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* Remove default focus outline and add our own accessible version */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Hide scrollbar for elements with .scrollbar-hide class */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* === Custom Utilities / Components === */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-gradient-primary {
+    background: linear-gradient(to right, var(--primary), var(--primary-dark));
+  }
+}
+
+/* Optional: Smooth transitions for hover/focus */
+.transition-all {
+  transition: all 0.2s ease;
 }

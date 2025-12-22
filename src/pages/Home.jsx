@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   PlayCircle,
@@ -6,8 +6,6 @@ import {
   Users,
   ShieldCheck,
   SlidersHorizontal,
-  ChevronLeft,
-  ChevronRight,
   Eye,
   Heart,
   MessageCircle,
@@ -18,8 +16,10 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 export default function HomePage() {
+  const [activeTab, setActiveTab] = useState("Week");
+  
   const features = [
-    { icon: PlayCircle, color: "bg-[#1E6A00]", title: "Streaming ", desc: "Watch civic events live" },
+    { icon: PlayCircle, color: "bg-[#1E6A00]", title: "Streaming", desc: "Watch civic events live" },
     { icon: BrainCircuit, color: "bg-[#EF2955]", title: "Learning", desc: "Browse Courses" },
     { icon: Users, color: "bg-[#334209]", title: "Mentorship", desc: "Connect with mentors" },
     { icon: ShieldCheck, color: "bg-[#622737]", title: "Trust & Authority", desc: "Verified content only" },
@@ -27,7 +27,7 @@ export default function HomePage() {
 
   const liveEvents = [
     { tag: "GOVERNANCE", tagBg: "bg-[#1E6A00] text-white", title: "Policy Debate in Nigeria", host: "@kenbenjamin", img: "/live1.png", cardBg: "bg-[#d3e4cd]" },
-    { tag: "LIFESTYLE", tagBg: "bg-[#1E6A00] text-white", title: "Morning Routines that work", host: "@Benita Ojo", img: "/live2.png", cardBg: "bg-[#d3e4cd]" },
+    { tag: "LIFESTYLE", tagBg: "bg-[#1E6A00] text-white", title: "Morning Routines that work", host: "@BenitaOjo", img: "/live2.png", cardBg: "bg-[#d3e4cd]" },
   ];
 
   const videos = [
@@ -38,18 +38,7 @@ export default function HomePage() {
     { img: "/video-1.png", title: "Building Strong Leaders", meta: "15 minutes", category: "Leadership" },
     { img: "/video-3.png", title: "Mentor-Student Success Stories", meta: "9.2K views", category: "Mentorship" },
   ];
-  
-  const [activeFilter, setActiveFilter] = useState("All");
-
-  const filteredVideos = videos.filter((v) => {
-    if (activeFilter === "All") return true; 
-    if (activeFilter === "Governance") return v.title.includes("Governance");
-    if (activeFilter === "Leadership") return v.title.includes("Leadership");
-    if (activeFilter === "Mentorship") return v.title.includes("Mentorship");
-    return true; 
-  });
-
-  const courses = [
+const courses = [
     { img: "/course-1.png", author: "David Chucks", title: "Content Marketing", weeks: "8 Weeks • Intermediate", desc: "What is Content Marketing? Content marketing is the process of creating and distributing valuable, relevant, and consistent content to attract and retain a clearly defined audience — and ultimately drive profitable customer action. Blogs, videos, social media posts, and podcasts are all examples of content marketing in action." },
     { img: "/course-2.png", author: "David Chucks", title: "Content Marketing", weeks: "8 Weeks • Intermediate", desc: "What is Content Marketing? Content marketing is the process of creating and distributing valuable, relevant, and consistent content to attract and retain a clearly defined audience — and ultimately drive profitable customer action. Blogs, videos, social media posts, and podcasts are all examples of content marketing in action." },
     { img: "/course-3.png", author: "David Chucks", title: "Content Marketing", weeks: "8 Weeks • Intermediate", desc: "What is Content Marketing? Content marketing is the process of creating and distributing valuable, relevant, and consistent content to attract and retain a clearly defined audience — and ultimately drive profitable customer action. Blogs, videos, social media posts, and podcasts are all examples of content marketing in action." },
@@ -71,40 +60,72 @@ export default function HomePage() {
     { img: "/insight-2.png", title: "The Rise of Civic Tech in Africa", authorImg: "/avarta.png", author: "Joanna Wale", date: "June 28, 2018", shares: "1K", desc: "How digital tools are transforming governance, accountability, and citizen participation across the continent." },
     { img: "/insight-3.png", title: "The Rise of Civic Tech in Africa", authorImg: "/avarta.png", author: "Joanna Wale", date: "June 28, 2018", shares: "1K", desc: "How digital tools are transforming governance, accountability, and citizen participation across the continent." },
   ];
+  // Carousel scroll logic
+  const scrollContainerRef = useRef(null);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -340, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 340, behavior: "smooth" });
+    }
+  };
+
+  // Filter state for videos
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filteredVideos = videos.filter((v) => {
+    if (activeFilter === "All") return true;
+    return v.category === activeFilter;
+  });
 
   return (
     <>
       <Navbar />
 
-       {/* Hero - Fixed vertical centering */}
-      <section className="relative h-screen pt-20 overflow-hidden flex items-center">
-        <img src="/homebg.png" alt="Hero" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/50" />
-
-        <div className="relative z-10 w-full">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6">
-    <div className="absolute left-[82px] top-[50px] w-[737px]">
-      <h1 className="font-semibold text-[48px] leading-[60px] text-white mb-6 sm:mb-8">
-        Empowering Nigerians<br />Through Learning and Civic<br />Insight
-      </h1>
-      <a href="About" className="inline-block bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white px-8 sm:px-10 md:px-12 py-3 sm:py-4 md:py-5 rounded-xl font-semibold text-base sm:text-lg transition shadow-2xl hover:shadow-green-500/50">
-        Explore PushUp.ng
-      </a>
-    </div>
-  </div>
-</div>
-        {/* Bottom Feature Cards - Fixed positioning */}
+      {/* Hero Section */}
+      <section className="relative h-screen pt-16 md:pt-20 overflow-hidden flex items-center justify-center">
+        <img
+          src="/homebg.png"
+          alt="Hero background"
+          className="absolute inset-0 w-full h-full object-cover animate-kenBurns"
+        />
+        <div className="absolute inset-0 bg-black/50 animate-fadeIn" />
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl animate-slideUpAndFade">
+         <h1 className="font-bold text-white leading-tight tracking-tight">
+  
+      <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+        Empowering Nigerians
+      </span>
+      <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mt-2 sm:mt-4">
+        Through Learning and Civic
+      </span>
+      <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mt-2 sm:mt-4">
+       Insight
+      </span>
+    </h1>
+          </div>
+        </div>
         <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 left-0 right-0 z-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 bg-green/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl">
               {features.map((f, i) => (
-                <div key={i} className="flex items-center gap-3 sm:gap-4">
+                <div
+                  key={i}
+                  onClick={() => console.log(`Clicked on ${f.title}`)}
+                  className="flex items-center gap-3 sm:gap-4 cursor-pointer group transition-all duration-300 hover:scale-105 active:scale-95"
+                >
                   <div className={`${f.color} p-4 sm:p-5 rounded-xl flex-shrink-0`}>
                     <f.icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-sm sm:text-base md:text-lg text-white">{f.title}</h3>
-                    <p className="text-xl sm:text-sm text-white">{f.desc}</p>
+                    <p className="text-xs sm:text-sm text-white">{f.desc}</p>
                   </div>
                 </div>
               ))}
@@ -127,12 +148,11 @@ export default function HomePage() {
       </div>
     </div>
 
-    {/* Live Events Container with exact Figma specs */}
     <div className="absolute  w-[1284px] h-[372px]  flex flex-col justify-start gap-[10px] mb-8 sm:mb-12">
       <div className="flex flex-row gap-6">
         {liveEvents.map((event, i) => (
           <div key={i} className={`${event.cardBg} rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition flex flex-row items-stretch h-[372px] `}>
-            {/* Text Content - Left Side */}
+            
             <div className="w-1/2 p-6 sm:p-8 md:p-10 flex flex-col justify-center text-[#333333]">
               <div>
                 <span className={`inline-block ${event.tagBg} px-4 sm:px-6 py-2 sm:py-2.5 font-bold text-sm sm:text-base mb-4 sm:mb-5 rounded`}>
@@ -140,26 +160,26 @@ export default function HomePage() {
                 </span>
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight mb-4">{event.title}</h3>
               </div>
-              <div className="flex items-center gap-4 text-base sm:text-lg text-gray-700">
-                <div className="flex items-center gap-2">
-                  <Eye size={20} className="sm:w-5 sm:h-5" /> 
-                  <span className="font-medium">Watch now</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users size={20} className="sm:w-5 sm:h-5" /> 
-                  <span className="font-medium">{event.host}</span>
-                </div>
-              </div>
+             <div className="flex items-center gap-4 text-base sm:text-lg text-gray-700">
+  <div className="flex items-center gap-2 whitespace-nowrap">
+    <Eye size={20} className="sm:w-5 sm:h-5" /> 
+    <span className="font-medium hidden sm:inline">Watch now</span>
+  </div>
+  <div className="flex items-center gap-2">
+    <Users size={20} className="sm:w-5 sm:h-5" /> 
+    <span className="font-medium break-words">{event.host}</span>
+  </div>
+</div>
             </div>
 
-            {/* Image - Right Side */}
-            <div className="relative w-1/2">
-              <img src={event.img} alt={event.title} className="w-full h-full object-cover" />
-              <span className="absolute top-3 sm:top-4 right-4 sm:right-4 bg-red-600 text-white px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-lg font-bold text-xs sm:text-sm flex items-center gap-2">
-                <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                LIVE
-              </span>
-            </div>
+           <div className="relative w-full md:w-1/2">
+    <img src={event.img} alt={event.title} className="w-full h-full object-cover rounded-lg" />
+    {/* LIVE badge */}
+    <span className="absolute top-3 sm:top-4 right-4 sm:right-4 bg-red-600 text-white px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-lg font-bold text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
+      <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+      LIVE
+    </span>
+  </div>
           </div>
         ))}
       </div>
@@ -175,6 +195,8 @@ export default function HomePage() {
     </div>
   </div>
 </section>
+
+   
 
       {/* About */}
       <section className="py-12 sm:py-16 md:py-20 bg-[#334209] text-white">

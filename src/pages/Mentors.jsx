@@ -10,24 +10,25 @@ export default function Mentors() {
       <Navbar />
 
    
-      <section className="relative h-screen">
-        <img
-          src="/mentors-bg.png"
-          alt="Meet Our Mentors"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/60"></div>
-
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 text-white">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
-            Meet Our Mentors
-          </h1>
-          <p className="text-2xl md:text-2xl max-w-4xl leading-relaxed">
-            Connect with experienced mentors dedicated to helping you grow your skills, 
-            navigate your career, and unlock new opportunities.
-          </p>
-        </div>
-      </section>
+   <section className="relative h-screen flex items-center justify-center overflow-hidden">
+  <img
+    src="/mentors-bg.png"
+    alt="Meet Our Mentors background"
+    className="absolute inset-0 w-full h-full object-cover animate-kenBurns"
+  />
+  <div className="absolute inset-0 bg-black/60 animate-fadeIn" />
+  <div className="relative z-10 text-center px-6 sm:px-10 md:px-12 max-w-6xl mx-auto">
+    <div className="animate-slideUpAndFade">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 sm:mb-8 leading-tight">
+        Meet Our Mentors
+      </h1>
+      <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/95 max-w-4xl mx-auto leading-relaxed">
+        Connect with experienced mentors dedicated to helping you grow your skills, 
+        navigate your career, and unlock new opportunities.
+      </p>
+    </div>
+  </div>
+</section>
 
       <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-6 text-center">
