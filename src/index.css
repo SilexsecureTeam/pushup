@@ -46,7 +46,7 @@ body {
   outline-offset: 2px;
 }
 
-/* Hide scrollbar for elements with .scrollbar-hide class */
+
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;    /* Firefox */
@@ -66,7 +66,7 @@ body {
   }
 }
 
-/* Optional: Smooth transitions for hover/focus */
+
 .transition-all {
   transition: all 0.2s ease;
 }

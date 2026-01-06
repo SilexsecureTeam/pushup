@@ -24,9 +24,9 @@ export default function About() {
   {/* Content */}
   <div className="relative z-10 text-center px-6 sm:px-10 md:px-12 max-w-6xl mx-auto">
     <div className="animate-slideUpAndFade">
-      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 sm:mb-8 leading-tight">
-        About Us
-      </h1>
+     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white mb-6 sm:mb-8 leading-tight">
+  About Us
+</h1>
       <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white/95 max-w-4xl mx-auto leading-relaxed">
         We're building a more informed, skilled, and empowered Nigeria through credible civic information, 
         meaningful learning, and community-driven mentorship.
@@ -189,22 +189,21 @@ export default function About() {
             </p>
       
       <form className="space-y-8">
-              {["Name", "Email", "Phone number"].map((label) => (
-                <div key={label} className="relative">
-                  <input
-                    type={label.includes("Email") ? "email" : label.includes("Phone") ? "tel" : "text"}
-                    required
-                    placeholder=" "
-                    className="peer w-full px-6 py-5 rounded-lg bg-white border border-white/20 focus:border-green-400 focus:outline-none placeholder-transparent"
-                  />
-                  <label className="absolute left-6 top-1/2 -translate-y-1/2 text-[#333333] pointer-events-none transition-all duration-200
-                    peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:-translate-y-1/2
-                    peer-focus:top-0 peer-focus:text-xs peer-focus:text-green-400
-                    peer-valid:top-0 peer-valid:text-xs">
-                    {label} <span className="text-red-500">*</span>
-                  </label>
-                </div>
-              ))}
+          <div className="space-y-6">
+  {["Name", "Email", "Phone number"].map((label) => (
+    <div key={label}>
+      <label className="block text-sm font-medium text-[#333333] mb-2">
+        {label} <span className="text-red-500">*</span>
+      </label>
+      <input
+        type={label.includes("Email") ? "email" : label.includes("Phone") ? "tel" : "text"}
+        required
+        className="w-full px-6 py-4 rounded-lg bg-white border border-gray-300 focus:border-[#358307] focus:outline-none"
+      />
+    </div>
+  ))}
+</div>
+            
 
               <select className="w-full px-6 py-5 rounded-lg bg-white border border-gray-300 text-[#333333] focus:border-green-400 focus:outline-none">
                 <option value="" disabled selected>How did you find us?</option>

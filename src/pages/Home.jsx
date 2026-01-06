@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   PlayCircle,
@@ -17,7 +17,21 @@ import Footer from "../components/Footer";
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState("Week");
-  
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+
+const nextSlide = () => {
+  setCurrentIndex((prev) =>
+    prev === liveEvents.length - 1 ? 0 : prev + 1
+  );
+};
+
+const prevSlide = () => {
+  setCurrentIndex((prev) =>
+    prev === 0 ? liveEvents.length - 1 : prev - 1
+  );
+};
+
   const features = [
     { icon: PlayCircle, color: "bg-[#1E6A00]", title: "Streaming", desc: "Watch civic events live" },
     { icon: BrainCircuit, color: "bg-[#EF2955]", title: "Learning", desc: "Browse Courses" },
@@ -26,8 +40,8 @@ export default function HomePage() {
   ];
 
   const liveEvents = [
-    { tag: "GOVERNANCE", tagBg: "bg-[#1E6A00] text-white", title: "Policy Debate in Nigeria", host: "@kenbenjamin", img: "/live1.png", cardBg: "bg-[#d3e4cd]" },
-    { tag: "LIFESTYLE", tagBg: "bg-[#1E6A00] text-white", title: "Morning Routines that work", host: "@BenitaOjo", img: "/live2.png", cardBg: "bg-[#d3e4cd]" },
+    { tag: "GOVERNANCE", tagBg: "bg-[#1E6A00] text-white", title: "Policy Debate in Nigeria", host: "ken benjamin", img: "/live1.png", cardBg: "bg-[#d3e4cd]" },
+    { tag: "LIFESTYLE", tagBg: "bg-[#1E6A00] text-white", title: "Morning Routines that work", host: "Benita Ojo", img: "/live2.png", cardBg: "bg-[#d3e4cd]" },
   ];
 
   const videos = [
@@ -60,20 +74,7 @@ const courses = [
     { img: "/insight-2.png", title: "The Rise of Civic Tech in Africa", authorImg: "/avarta.png", author: "Joanna Wale", date: "June 28, 2018", shares: "1K", desc: "How digital tools are transforming governance, accountability, and citizen participation across the continent." },
     { img: "/insight-3.png", title: "The Rise of Civic Tech in Africa", authorImg: "/avarta.png", author: "Joanna Wale", date: "June 28, 2018", shares: "1K", desc: "How digital tools are transforming governance, accountability, and citizen participation across the continent." },
   ];
-  // Carousel scroll logic
-  const scrollContainerRef = useRef(null);
 
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -340, behavior: "smooth" });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 340, behavior: "smooth" });
-    }
-  };
 
   // Filter state for videos
   const [activeFilter, setActiveFilter] = useState("All");
@@ -97,18 +98,17 @@ const courses = [
         <div className="absolute inset-0 bg-black/50 animate-fadeIn" />
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl animate-slideUpAndFade">
-         <h1 className="font-bold text-white leading-tight tracking-tight">
-  
-      <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-        Empowering Nigerians
-      </span>
-      <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mt-2 sm:mt-4">
-        Through Learning and Civic
-      </span>
-      <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mt-2 sm:mt-4">
-       Insight
-      </span>
-    </h1>
+  <h1 className="font-bold text-white leading-tight tracking-tight">
+  <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+    Empowering Nigerians
+  </span>
+  <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mt-2">
+    Through Learning and Civic
+  </span>
+  <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mt-2">
+    Insight
+  </span>
+</h1>
           </div>
         </div>
         <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 left-0 right-0 z-20">
@@ -134,64 +134,118 @@ const courses = [
         </div>
       </section>
 
-<section className="py-12 sm:py-16 md:py-20 bg-white">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6">
-    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 sm:mb-10 gap-4">
+<section className="py-12 md:py-16 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Header */}
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
       <div>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Live Now & Upcoming</h2>
-        <p className="text-gray-600 text-base sm:text-lg md:text-xl mt-2">Live streams, courses, mentors, and more.</p>
+        <h2 className="text-3xl md:text-4xl font-bold text-[#333333]">
+          Live Now & Upcoming
+        </h2>
+        <p className="text-gray-600 mt-2">
+          Live streams, courses, mentors, and more.
+        </p>
       </div>
-      <div className="flex items-center gap-3 sm:gap-4 text-sm sm:text-base flex-wrap">
-        <a href="#" className="flex items-center gap-2 text-gray-500 hover:text-gray-700"><SlidersHorizontal size={18} className="sm:w-5 sm:h-5" /> Filter</a>
-        <span className="hidden sm:block w-px h-6 sm:h-8 bg-gray-300"></span>
-        <a href="Live" className="font-semibold flex items-center gap-2 text-[#1E6A00] hover:underline">See All <ArrowRight size={18} className="sm:w-5 sm:h-5" /></a>
+
+      <div className="flex items-center gap-4">
+        <button className="flex items-center gap-2 text-gray-500">
+          <SlidersHorizontal size={18} /> Filter
+        </button>
+        <Link
+          to="/Live"
+          className="font-semibold flex items-center gap-2 text-[#1E6A00]"
+        >
+          See All <ArrowRight size={18} />
+        </Link>
       </div>
     </div>
 
-    <div className="absolute  w-[1284px] h-[372px]  flex flex-col justify-start gap-[10px] mb-8 sm:mb-12">
-      <div className="flex flex-row gap-6">
-        {liveEvents.map((event, i) => (
-          <div key={i} className={`${event.cardBg} rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition flex flex-row items-stretch h-[372px] `}>
-            
-            <div className="w-1/2 p-6 sm:p-8 md:p-10 flex flex-col justify-center text-[#333333]">
-              <div>
-                <span className={`inline-block ${event.tagBg} px-4 sm:px-6 py-2 sm:py-2.5 font-bold text-sm sm:text-base mb-4 sm:mb-5 rounded`}>
-                  {event.tag}
-                </span>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight mb-4">{event.title}</h3>
-              </div>
-             <div className="flex items-center gap-4 text-base sm:text-lg text-gray-700">
-  <div className="flex items-center gap-2 whitespace-nowrap">
-    <Eye size={20} className="sm:w-5 sm:h-5" /> 
-    <span className="font-medium hidden sm:inline">Watch now</span>
-  </div>
-  <div className="flex items-center gap-2">
-    <Users size={20} className="sm:w-5 sm:h-5" /> 
-    <span className="font-medium break-words">{event.host}</span>
-  </div>
-</div>
-            </div>
+   
+    <div className="relative">
+      {/* Left Arrow  */}
+      <button
+        onClick={prevSlide}
+        className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 
+                   items-center justify-center w-12 h-12 bg-white rounded-full shadow-xl 
+                   border-2 border-[#1E6A00] hover:bg-gray-50 transition"
+        aria-label="Previous event"
+      >
+        <ArrowLeft className="w-6 h-6 text-[#1E6A00]" />
+      </button>
 
-           <div className="relative w-full md:w-1/2">
-    <img src={event.img} alt={event.title} className="w-full h-full object-cover rounded-lg" />
-    {/* LIVE badge */}
-    <span className="absolute top-3 sm:top-4 right-4 sm:right-4 bg-red-600 text-white px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 rounded-lg font-bold text-xs sm:text-sm flex items-center gap-2 whitespace-nowrap">
-      <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+      {/* Carousel Container */}
+      <div className="overflow-hidden">
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {liveEvents.map((event, i) => (
+            <div
+              key={i}
+              className="w-full flex-shrink-0 px-0 lg:px-4" 
+            >
+              <div className="bg-[#d3e4cd] rounded-2xl shadow-lg overflow-hidden flex flex-col lg:flex-row">
+  {/* Text Part*/}
+  <div className="p-6 md:p-8 flex-1 order-2 lg:order-1">
+    <span className={`inline-block ${event.tagBg} px-4 py-2 text-sm font-bold rounded mb-4`}>
+      {event.tag}
+    </span>
+    <h3 className="text-xl md:text-2xl font-bold mb-4">
+      {event.title}
+    </h3>
+    <div className="flex flex-wrap gap-6 text-gray-700 text-sm">
+      <span className="flex items-center gap-2">
+        <Eye size={18} /> Watch now
+      </span>
+      <span className="flex items-center gap-2">
+        <Users size={18} /> {event.host}
+      </span>
+    </div>
+  </div>
+
+  {/* Image Part - Second on mobile */}
+  <div className="relative lg:w-1/2 aspect-video order-1 lg:order-2">
+    <img
+      src={event.img}
+      alt={event.title}
+      className="w-full h-full object-cover"
+    />
+    <span className="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded text-xs font-bold flex items-center gap-2">
+      <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
       LIVE
     </span>
   </div>
-          </div>
-        ))}
+</div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
 
-    <div className="flex justify-start gap-3 sm:gap-4 mt-[480px]">
-      <button className="bg-white border-2 border-[#1E6A00] p-3 sm:p-4 rounded-lg hover:bg-gray-50 hover:border-[#1E6A00] transition">
-        <ArrowLeft className="w-6 h-6 sm:w-7 sm:h-7 text-[#2d3a08]" />
+      <button
+        onClick={nextSlide}
+        className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 
+                   items-center justify-center w-12 h-12 bg-white rounded-full shadow-xl 
+                   border-2 border-[#1E6A00] hover:bg-gray-50 transition"
+        aria-label="Next event"
+      >
+        <ArrowRight className="w-6 h-6 text-[#1E6A00]" />
       </button>
-      <button className="bg-white border-2 border-[#1E6A00] p-3 sm:p-4 rounded-lg hover:bg-gray-50 hover:border-[#1E6A00] transition">
-        <ArrowRight className="w-6 h-6 sm:w-7 sm:h-7 text-[#2d3a08]" />
-      </button>
+
+     
+      <div className="flex justify-center gap-6 mt-4 lg:hidden">
+        <button
+          onClick={prevSlide}
+          className="p-3 border-2 border-[#1E6A00] rounded-lg hover:bg-gray-100 transition"
+        >
+          <ArrowLeft className="w-6 h-6" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="p-3 border-2 border-[#1E6A00] rounded-lg hover:bg-gray-100 transition"
+        >
+          <ArrowRight className="w-6 h-6" />
+        </button>
+      </div>
     </div>
   </div>
 </section>
