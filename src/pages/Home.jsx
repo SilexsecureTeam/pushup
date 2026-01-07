@@ -161,10 +161,10 @@ const courses = [
     </div>
 
     <div className="relative">
-      {/* Left Arrow */}
+      {/* Left Arrow  */}
       <button
         onClick={prevSlide}
-        className="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 z-10 
+        className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 
                    items-center justify-center w-12 h-12 bg-white rounded-full shadow-xl 
                    border-2 border-[#1E6A00] hover:bg-gray-50 transition"
         aria-label="Previous event"
@@ -181,10 +181,10 @@ const courses = [
           {liveEvents.map((event, i) => (
             <div
               key={i}
-              className="flex-shrink-0 w-[90%] sm:w-[80%] lg:w-[48%] px-2 lg:px-4"
+              className="w-full flex-shrink-0 px-0 lg:px-4"
             >
               <div className="bg-[#d3e4cd] rounded-2xl shadow-lg overflow-hidden flex flex-col lg:flex-row">
-                {/* Text Part */}
+                {/* Text Part*/}
                 <div className="p-6 md:p-8 flex-1 order-2 lg:order-1">
                   <span className={`inline-block ${event.tagBg} px-4 py-2 text-sm font-bold rounded mb-4`}>
                     {event.tag}
@@ -202,7 +202,7 @@ const courses = [
                   </div>
                 </div>
 
-                {/* Image Part */}
+                {/* Image Part - Second on mobile */}
                 <div className="relative lg:w-1/2 aspect-video order-1 lg:order-2">
                   <img
                     src={event.img}
@@ -220,10 +220,9 @@ const courses = [
         </div>
       </div>
 
-      {/* Right Arrow */}
       <button
         onClick={nextSlide}
-        className="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 z-10 
+        className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 
                    items-center justify-center w-12 h-12 bg-white rounded-full shadow-xl 
                    border-2 border-[#1E6A00] hover:bg-gray-50 transition"
         aria-label="Next event"
@@ -231,7 +230,6 @@ const courses = [
         <ArrowRight className="w-6 h-6 text-[#1E6A00]" />
       </button>
 
-      {/* Mobile arrows */}
       <div className="flex justify-center gap-6 mt-4 lg:hidden">
         <button
           onClick={prevSlide}
@@ -249,7 +247,6 @@ const courses = [
     </div>
   </div>
 </section>
-
    
 
       {/* About */}
