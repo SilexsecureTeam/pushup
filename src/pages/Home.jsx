@@ -96,7 +96,7 @@ const courses = [
           className="absolute inset-0 w-full h-full object-cover animate-kenBurns"
         />
         <div className="absolute inset-0 bg-black/50 animate-fadeIn" />
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 pb-40 lg:px-8">
           <div className="max-w-4xl animate-slideUpAndFade">
   <h1 className="font-bold text-white leading-tight tracking-tight">
   <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
