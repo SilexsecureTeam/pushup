@@ -9,10 +9,8 @@ export default function Learning() {
     <>
       <Navbar />
 
-      
-      {/* Courses Hero - with fade-in + slide-up animation */}
 <section className="relative h-screen flex items-center justify-center overflow-hidden">
-  {/* Background Image with Ken Burns zoom */}
+ 
   <img
     src="/learning-bg.png"
     alt="Courses background"
@@ -64,11 +62,11 @@ export default function Learning() {
           </div>
 
         
-          <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {[...Array(12)].map((_, i) => (
               <div
                 key={i}
-                className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2"
+                className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2"
               >
                 <img
                   src={`/course-${(i % 3) + 1}.png`}

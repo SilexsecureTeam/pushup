@@ -42,7 +42,7 @@ export default function Videos() {
           <h1 className="text-4xl md:text-5xl font-semibold text-[#333333] mb-4">
             Featured Videos
           </h1>
-       <p className="text-2xl text-[#333333] max-w-4xl mb-12">
+       <p className="text-xl  text-[#333333] max-w-4xl mb-12">
   Watch curated videos on governance, learning, and community insights.<br />
   Explore content that keeps you informed, skilled, and engaged.
 </p>

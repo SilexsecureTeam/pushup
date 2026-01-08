@@ -160,9 +160,8 @@ const courses = [
       </div>
     </div>
 
-   
     <div className="relative">
-      {/* Left Arrow  */}
+      {/* Desktop Arrows - unchanged from your original */}
       <button
         onClick={prevSlide}
         className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 
@@ -172,54 +171,6 @@ const courses = [
       >
         <ArrowLeft className="w-6 h-6 text-[#1E6A00]" />
       </button>
-
-      {/* Carousel Container */}
-      <div className="overflow-hidden">
-        <div
-          className="flex transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        >
-          {liveEvents.map((event, i) => (
-            <div
-              key={i}
-              className="w-full flex-shrink-0 px-0 lg:px-4" 
-            >
-              <div className="bg-[#d3e4cd] rounded-2xl shadow-lg overflow-hidden flex flex-col lg:flex-row">
-  {/* Text Part*/}
-  <div className="p-6 md:p-8 flex-1 order-2 lg:order-1">
-    <span className={`inline-block ${event.tagBg} px-4 py-2 text-sm font-bold rounded mb-4`}>
-      {event.tag}
-    </span>
-    <h3 className="text-xl md:text-2xl font-bold mb-4">
-      {event.title}
-    </h3>
-    <div className="flex flex-wrap gap-6 text-gray-700 text-sm">
-      <span className="flex items-center gap-2">
-        <Eye size={18} /> Watch now
-      </span>
-      <span className="flex items-center gap-2">
-        <Users size={18} /> {event.host}
-      </span>
-    </div>
-  </div>
-
-  {/* Image Part - Second on mobile */}
-  <div className="relative lg:w-1/2 aspect-video order-1 lg:order-2">
-    <img
-      src={event.img}
-      alt={event.title}
-      className="w-full h-full object-cover"
-    />
-    <span className="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded text-xs font-bold flex items-center gap-2">
-      <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-      LIVE
-    </span>
-  </div>
-</div>
-            </div>
-          ))}
-        </div>
-      </div>
 
       <button
         onClick={nextSlide}
@@ -231,7 +182,65 @@ const courses = [
         <ArrowRight className="w-6 h-6 text-[#1E6A00]" />
       </button>
 
-     
+      {/* Carousel Container */}
+      <div className="overflow-hidden">
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {liveEvents.map((event, i) => (
+            <div
+              key={i}
+              className="w-full flex-shrink-0 px-0 lg:px-4"
+            >
+              <div className="bg-[#d3e4cd] rounded-2xl shadow-lg overflow-hidden 
+                              flex flex-row lg:flex-row h-64 sm:h-80 lg:auto">
+                
+
+                <div className="w-1/2 lg:w-1/2 flex flex-col justify-between p-4 sm:p-6 lg:p-8 order-1 lg:order-2">
+                  {/* Tag */}
+                  <div>
+                    <span className={`inline-block ${event.tagBg} px-3 py-1.5 text-xl sm:text-xl font-bold rounded mb-4`}>
+                      {event.tag}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <div className="flex-1 flex items-center">
+                    <h3 className="text-lg sm:text-2xl lg:text-2xl font-bold text-[#333333] leading-tight">
+                      {event.title}
+                    </h3>
+                  </div>
+
+                  {/* Watch + Host */}
+                  <div className="flex flex-col sm:flex-row gap-4 sm:gap-4 text-gray-700 text-sm">
+                    <span className="flex items-center gap-2">
+                      <Eye size={18} /> Watch now
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <Users size={18} /> {event.host}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="relative w-1/2 lg:w-1/2 order-1 lg:order-2">
+                  <img
+                    src={event.img}
+                    alt={event.title}
+                    className="w-full h-full object-cover rounded-l-none rounded-r-2xl lg:rounded-l-none lg:rounded-r-2xl"
+                  />
+                  <span className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-red-600 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded text-xs sm:text-sm font-bold flex items-center gap-2">
+                    <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-white rounded-full animate-pulse" />
+                    LIVE
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile Arrows (below) - unchanged */}
       <div className="flex justify-center gap-6 mt-4 lg:hidden">
         <button
           onClick={prevSlide}
@@ -261,12 +270,12 @@ const courses = [
               <span className="absolute bottom-0 left-0 w-24 sm:w-32 h-1.5 sm:h-2 bg-white rounded-full"></span>
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl opacity-90 mb-4 sm:mb-6">Empowering Learning, Mentorship, and Civic Engagement</p>
-            <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-6 sm:mb-8">
+            <p className="text-base sm:text-sm md:text-xl leading-relaxed mb-6 sm:mb-8">
               PushUp.ng is Africa's premier digital hub for learning, mentorship, civic engagement, and professional streaming.
               Our platform empowers individuals, organizations, and communities to access high-quality multimedia content, connect with mentors,
               and engage in meaningful civic discussions — all in one seamless digital experience.
             </p>
-            <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-8 sm:mb-10">
+            <p className="text-base sm:text-sm md:text-xl leading-relaxed mb-8 sm:mb-10">
               From live events and on-demand videos to online courses and mentorship programs, PushUp.ng is designed to inspire growth, foster learning, 
               and facilitate connections. Citizens and policymakers can stay informed through our governance media hub, while professionals and students can
               access verified mentors and skill-building resources.
@@ -276,7 +285,7 @@ const courses = [
           <img src="/image1.png" alt="About" className="rounded-2xl sm:rounded-3xl shadow-2xl w-full object-cover" />
         </div>
       </section>
-
+{/* most viewed videos*/}
      <section className="py-12 sm:py-16 md:py-20 bg-white">
   <div className="max-w-7xl mx-auto px-4 sm:px-6">
     <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 sm:mb-10 md:mb-12 gap-4 sm:gap-6">
@@ -305,10 +314,10 @@ const courses = [
         <span
           key={filter}
           onClick={() => setActiveFilter(filter)}
-          className={`cursor-pointer transition ${
+          className={`cursor-pointer  px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full  transition ${
             activeFilter === filter
-              ? "font-bold text-black"
-              : "hover:text-black"
+               ? "bg-gradient-to-r from-[#1E6A00] to-[#334209] text-white"
+            : "hover:bg-gray-100"
           }`}
         >
           {filter}
