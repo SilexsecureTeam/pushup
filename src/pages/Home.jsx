@@ -96,7 +96,7 @@ const courses = [
           className="absolute inset-0 w-full h-full object-cover animate-kenBurns"
         />
         <div className="absolute inset-0 bg-black/50 animate-fadeIn" />
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 pb-40 lg:px-8">
           <div className="max-w-4xl animate-slideUpAndFade">
   <h1 className="font-bold text-white leading-tight tracking-tight">
   <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
@@ -161,7 +161,7 @@ const courses = [
     </div>
 
     <div className="relative">
-      {/* Desktop Arrows - unchanged from your original */}
+      
       <button
         onClick={prevSlide}
         className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 
@@ -171,7 +171,21 @@ const courses = [
       >
         <ArrowLeft className="w-6 h-6 text-[#1E6A00]" />
       </button>
-
+      {/* Carousel Container */}
+      <div className="overflow-hidden">
+        <div
+          className="flex transition-transform duration-500 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {liveEvents.map((event, i) => (
+            <div
+              key={i}
+              className="w-full flex-shrink-0 px-0 lg:px-4"
+            >
+            </div>
+          ))}
+        </div>
+      </div>
       <button
         onClick={nextSlide}
         className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 
@@ -258,7 +272,6 @@ const courses = [
     </div>
   </div>
 </section>
-
    
 
       {/* About */}
@@ -437,7 +450,7 @@ const courses = [
             Explore a wide range of expert-led courses designed to help you build practical skills and deepen your understanding of key topics.
             From governance and leadership to digital marketing and personal development, each lesson is crafted to support your growth at every level.
           </p>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {courses.map((c, i) => (
               <div key={i} className="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition">
                 <img src={c.img} alt="Course" className="w-full h-48 sm:h-56 md:h-64 object-cover" />
@@ -598,7 +611,7 @@ const courses = [
             <span className="absolute bottom-0 left-0 w-24 sm:w-32 h-1.5 sm:h-2 bg-[#1E6A00] rounded-full"></span>
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-medium mb-8 sm:mb-10 text-[#333333]">Discover fresh perspectives, expert insights, and real stories shaping our community</p>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
+          <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
             {insights.map((ins, i) => (
               <div key={i} className="group cursor-pointer">
                 <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl mb-4 sm:mb-6">
